@@ -1,0 +1,45 @@
+﻿@model CRS.Models.CascadingLocator
+<div class="columnBox2">
+    <div>
+        <label>Channel</label>
+        <div class="shortCombo">
+            <select data-bind="options: channelList, optionsText: 'Name', optionsValue: @{ @Html.Raw(Model.UseChannelId ? "'Id'" : "'Code'") },
+                                optionsCaption: 'Select Item',
+                                value: @{ @Html.Raw(Model.UseChannelId ? "channelId" : "channelCode") }"></select>
+        </div>
+    </div>
+    <div>
+        <label>Region</label>
+        <div class="shortCombo">
+            <select data-bind="options: regionList, optionsText: 'Name', optionsValue: @{ @Html.Raw(Model.UseRegionId ? "'Id'" : "'Code'") },
+                                optionsCaption: 'Select Item',
+                                value: @{ @Html.Raw(Model.UseRegionId ? "regionId" : "regionCode") }"></select>
+        </div>
+    </div>
+   @* <div>
+        <label>Area</label>
+        <div class="shortCombo">
+            <select data-bind="options: areaList, optionsText: 'Name', optionsValue: @{ @Html.Raw(Model.UseAreaId ? "'Id'" : "'Code'") },
+                                optionsCaption: 'Select Item',
+                                value: @{ @Html.Raw(Model.UseAreaId ? "areaId" : "areaCode") }"></select>
+        </div>
+    </div>*@
+    <div>
+        <label>District</label>
+        <div class="shortCombo">
+            <select data-bind="options: districtList, optionsText: 'Name', optionsValue: @{ @Html.Raw(Model.UseDistrictId ? "'Id'" : "'Code'") },
+                                optionsCaption: 'Select Item',
+                                value: @{ @Html.Raw(Model.UseDistrictId ? "districtId" : "districtCode") }"></select>
+        </div>
+    </div>
+    @if(!Model.ExcludeBranch) {
+        <div>
+            <label>Branch</label>
+            <div class="shortCombo">
+                <select data-bind="options: branchList, optionsText: 'Name', optionsValue: @{ @Html.Raw(Model.UseBranchId ? "'Id'" : "'Code'") },
+                                    optionsCaption: 'Select Item',
+                                    value: @{ @Html.Raw(Model.UseBranchId ? "branchId" : "branchCode") }"></select>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,96 @@
+﻿@model CRS.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+
+<html>
+    <head>
+        <title></title>
+
+        @Styles.Render("~/Content/reset.css") 
+		@**
+        @Styles.Render("~/Content/css")
+		@Styles.Render("~/Content/themes/base/css")
+        **@
+        @Styles.Render("~/Content/master.css")
+        <style>
+            #timeoutmsg {
+               width: 400px;
+               border: 1px solid #D8D8D8;
+               padding: 5px;
+               border-radius: 5px;
+               font-family: Arial;
+               font-size: 11px;
+               text-transform: uppercase;
+               background-color: rgb(255, 249, 242);
+               color: rgb(211, 0, 0);
+               text-align: center;
+             }
+        </style>
+     
+        <!--[if IE 8]>   <link href="@Url.Content("~/Content/ie8.css")" rel="stylesheet" type="text/css" /> <![endif]-->
+        <!--<link href="@Url.Content("~/Content/ie9.css")" rel="stylesheet" type="text/css" /> -->
+        <!--[if IE 10]>   <link href="@Url.Content("~/Content/ie9.css")" rel="stylesheet" type="text/css" /> <![endif]-->
+        @**
+         @Scripts.Render("~/bundles/jquery") 
+        **@
+        @Scripts.Render("~/Scripts/jquery-1.7.2.js")
+    </head>
+<body>
+<div class="lineTop"></div>
+<div id="wrapper">
+	<div class="blueBackground"></div>
+	<div id="innerWrapper">
+    	
+    
+        
+    
+    <div class="mainBody">
+    	<div class="loginLogo">
+        	<a href="#">
+            	<img src="@Url.Content("~/images/loginLogo.jpg")"  />
+            </a>
+        </div>
+        <div class="loginText">Application Tracking System</div>
+    	@**
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+        **@
+        @using(Html.BeginForm("LoginType","Account",new { ReturnUrl=ViewBag.ReturnUrl},FormMethod.Post)){
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+           <div class="loginBody">
+        	<div class="loginInner">
+                @if (ViewBag.SessionTimeout != null) {
+                   <div id="timeoutmsg">@ViewBag.SessionTimeout</div>
+                }
+                <h2>Are you an Applicant or Application User?</h2>
+                <span class="loginLine"></span>
+                
+                <div class="loginInput">
+                	@Html.DropDownList("UserType", (SelectList)ViewBag.UserType, new { onchange="this.form.submit();"})
+                </div>
+                
+                <div class="clear"></div>
+               
+                
+            </div>
+        </div>
+     }
+    </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="footer">
+	<div class="innerFooter">
+    
+    </div>
+</div>
+    
+    
+     <script type="text/javascript" src="@Url.Content("~/Scripts/master.js")"></script>
+
+</body>
+</html>
+

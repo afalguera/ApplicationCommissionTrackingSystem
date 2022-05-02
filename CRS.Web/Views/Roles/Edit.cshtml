@@ -1,0 +1,82 @@
+﻿@model CRS.BusinessEntities.Role
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        
+        function OpenConfirmationDialog(name) {
+            $('#ConfirmContent').html('Are you sure you wish to delete ' + name + '?');
+            $('#Confirmation-Dialog').dialog('open');
+        }   
+     
+        $("#Confirmation-Dialog").dialog({
+            resizable: false,
+            height: 180,
+            width: 300,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "OK": function () {
+                    location.href = '@Url.Action("Delete", "Roles", new { id = @Model.ID })';
+                $(this).dialog("close");
+            },
+            Cancel: function () {
+                $(this).dialog("close");
+            }
+        }
+        });
+
+        $(".colorButton").removeAttr('style').css("width", "100px");
+    </script>
+}
+
+
+<div id="Confirmation-Dialog">
+    <div id="ConfirmContent" ">Are you sure you wish to delete?</div>      
+</div>
+
+                
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <ol>
+            <li>
+                @Html.HiddenFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            
+        </ol>
+        <div class="clear margined"></div>
+        @if ( (ViewBag.PageAccess as CRS.BusinessEntities.UserPageAccess).CanEdit)
+        {
+              <input type="submit" value="Save" class="colorButton"/>
+        }
+        
+        @if ( (ViewBag.PageAccess as CRS.BusinessEntities.UserPageAccess).CanDelete)
+        {
+            <input type="button" title="Delete role" class="colorButton" value="Delete" onclick="OpenConfirmationDialog('@Model.Name')" />
+        }
+         <input type="button" value="Back" onclick="history.back();" class="colorButton"/>
+    </fieldset>
+    
+}
+
+
+
+
+
+
+

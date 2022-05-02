@@ -1,0 +1,41 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Source Code</label>
+                <input type="text" data-bind="value: sourceCode" placeholder="Source Code" />
+            </div>
+             <div>
+			    <label>Channel:</label>
+			    <div class="shortCombo">
+						    <select id="ddChannel" data-bind="options: channelList, enable: enableChannel,
+                                                                optionsText: 'Name',
+                                                                optionsValue: 'Code',
+                                                                value: selectedChannel,
+                                                                optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+            <div>
+                <label>Source Name</label>
+                <input type="text" data-bind="value: sourceName" placeholder="Source Name" />
+            </div>           
+           <div>
+                <label>Is Commissionable</label>
+                <input type="checkbox" data-bind="checked: IsForCommission" />
+           </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,21 @@
+﻿@using CRS.BusinessEntities
+@using CRS.Helpers
+@**
+@if (ViewBag.BannerAds != null)
+**@
+
+@if (SessionWrapper.BannerAdsCollection != null  && CRS.Helpers.SessionWrapper.PageAccess != null &&
+       Request.IsAuthenticated 
+    )
+{
+    if (SessionWrapper.BannerAdsCollection.Count > 0)
+    { 
+        <ul class="bxslider">
+         @foreach (CMSBannerAdsImage tmp in SessionWrapper.BannerAdsCollection)
+        {
+            <li><a href="@tmp.TargetUrl"><img src="@tmp.ImagePath" title="@tmp.ImageName" /></a></li>
+        }
+        </ul>
+    }
+            
+}

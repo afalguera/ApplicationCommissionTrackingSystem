@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "District";
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href= "@Url.Content("~/Content/ambience/jquery.ambiance.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/ambience/demo.css")" rel="stylesheet" />
+    @Styles.Render("~/Content/Bootstrap/bootstrap.min.css",
+        "~/Content/Bootstrap/bootstrap-responsive.min.css",
+        "~/Content/Bootstrap/bootstrap-image-gallery.min.css")
+}
+
+@section jquerylibrary{
+    @Scripts.Render("~/Scripts/jquery-2.0.2.min.js")
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/knockout-2.2.1.js",
+        "~/Scripts/jquery.blockUI.min.js",
+        "~/bundles/koBindings",
+        "~/Scripts/knockout.validation.js",
+        "~/Scripts/Application/District.js")
+
+    @Scripts.Render("~/bundles/ajaxwrapper")
+    <script src="@Url.Content("~/Content/ambience/jquery.ambiance.js")"  type="text/javascript"></script>
+
+    <script id="districtTableTemplate" type="text/html">
+        <td nowrap data-bind="text: DistrictCode"></td>
+        <td nowrap data-bind="text: DistrictName"></td>
+        <td nowrap data-bind="text: RegionName"></td>
+        <td nowrap data-bind="text: ChannelName"></td>
+        <td nowrap data-bind="text: DistrictTIN"></td>
+        <td nowrap data-bind="text: DistrictAccountName"></td>
+        <td nowrap data-bind="text: DistrictAccountNumber"></td>
+        <td nowrap data-bind="text: DistrictBankBranch"></td>
+        <td nowrap class="tdCenter">
+            <center>
+                @if(ViewBag.PageAccess.CanEdit)
+                {
+                    <a href="#districtModal" role="link" class="edit_button" data-bind="click: $root.edit" data-toggle="modal">Edit</a>
+                }
+                @if(ViewBag.PageAccess.CanDelete)
+                {
+                    <a href="#confirmDeleteModal" role="link" class="delete_button" data-bind="click: $root.setId" data-toggle="modal">Delete</a>
+                }
+            </center>
+        </td>
+    </script>
+}
+
+@Html.Partial("_Modal", new CRS.Models.ModalViewModel("districtModal")
+{
+    Attributes = new { style = "width: auto" },
+    TitleAttributes = new { data_bind = "text: title" },
+    Body = @Html.Partial("_DistrictForm"),
+    DefaultButtonText = "Save",
+    DefaultButtonAttributes = new { data_bind = "click: save" }
+})
+
+@if(ViewBag.PageAccess.CanDelete)
+{
+    @Html.Partial("_Modal", new CRS.Models.ModalViewModel("confirmDeleteModal")
+    {
+        Attributes = new { style = "width: auto, height: auto" },
+        Title = "Delete District Details",
+        Body = MvcHtmlString.Create("<p>Continue deletion?</p>"),
+        DefaultButtonText = "Yes",
+        DefaultButtonAttributes = new { data_bind = "click: deleteDistrict" },
+        CancelButtonText = "No"
+    })
+}
+
+<div class="demo">
+    <table id="districtTable" cellpadding="0" cellspacing="0" border="0" class="display"
+        data-bind="dataTable: { dataSource: items,
+			        rowTemplate: 'districtTableTemplate',
+			        columns: itemColumns, 	
+                    options: {
+				        bJQueryUI: true,
+				        bPaginate: true,
+				        bLengthChange: true,
+				        bFilter: true,
+				        bSort: true,
+				        bInfo: true,
+				        bAutoWidth: true,
+				        bProcessing: true,
+				        sPaginationType: 'full_numbers',
+				        bDeferRender: true
+			        }}">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>District</th>
+                <th>Region</th>
+                <th>Channel</th>
+                <th>TIN</th>
+                <th>Account Name</th>
+                <th>Account Number</th>
+                <th>Bank Branch</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <br />
+    @if(ViewBag.PageAccess.CanAdd)
+    {
+        <a href="#districtModal" role="button" class="btn btn-primary" data-bind="click: add" data-toggle="modal">Add</a>
+    }
+</div>

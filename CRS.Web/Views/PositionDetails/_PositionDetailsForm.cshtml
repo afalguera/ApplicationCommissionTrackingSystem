@@ -1,0 +1,43 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Name</label>
+                <input type="text" data-bind="value: positionDetailsName" placeholder="Name" />
+            </div>           
+            <div>
+			     <label>Position Type:</label>
+			     <div class="shortCombo">
+						    <select id="ddPostionType" data-bind="options: positionTypeList, enable: enablePositionType,
+                            optionsText: 'Name',
+                            optionsValue: 'Code',
+                            value: positionTypeCode,
+                            optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>      
+            <div>
+			     <label>Position Code:</label>
+			     <div class="shortCombo">
+						    <select id="ddPosition" data-bind="options: positionList, enable: enablePosition,
+                            optionsText: 'Name',
+                            optionsValue: 'Code',
+                            value: positionCode,
+                            optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,150 @@
+﻿@model CRS.BusinessEntities.User
+
+@{
+    ViewBag.Title = "Manage";
+}
+
+
+@section styles {
+    <style>
+        .ui-dialog-titlebar-close {
+            display: none;
+        }
+
+        #dialog {
+            text-align : center;
+        }
+
+        .contentHolder label {
+            min-width: 110px;
+        }
+
+        .contentHolder input {
+            float: none;
+        }
+      </style>
+}
+    
+  
+
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval") 
+    <script type="text/javascript">   
+        var nextUrl = '';
+        function OnSuccess(data, status, xhr) {
+            nextUrl = data.url;
+            $("#dialog").dialog("close");
+        }
+
+        function OnComplete() {
+        }
+
+        function OnBegin() {
+            $("#dialog").dialog("open");
+        }
+
+        $(function () {
+            $("#dialog").dialog({
+                modal: true,
+                title: 'Please wait..',
+                autoOpen: false,
+                closeOnEscape: false,
+                close: function (event, ui) {
+                    alert("Save successful");
+                    window.location.href = nextUrl;
+                },
+                show: {
+                    effect: "blind",
+                    duration: 500
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 500,
+
+                }
+            });
+        }
+       )
+    
+    </script>  
+    
+}
+
+<div id="dialog"><img alt="image" src="../Images/animatedwait.gif"/></div>
+
+
+
+@using (Ajax.BeginForm(new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "OnSuccess(data,status,xhr)",
+    OnBegin = "OnBegin()",
+    OnComplete = "OnComplete()",
+    Confirm  = "Are you sure you wish to save this information?",
+    OnFailure = "alert('Error saving')"
+      
+}
+))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(m => m.ID)
+        <div class="columnBox">
+            <div> 
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { disabled = "disabled" })
+            </div>
+
+            <div> 
+                @Html.LabelFor(m => m.NewPassword)
+                @Html.PasswordFor(m=> m.NewPassword)
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </div>
+
+            <div> 
+                @Html.LabelFor(m => m.NewPasswordConfirm)
+                @Html.PasswordFor(m => m.NewPasswordConfirm)
+                @Html.ValidationMessageFor(m => m.NewPasswordConfirm)
+            </div>
+        </div>
+
+        <div class="columnBox">
+            <div>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName )
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName) 
+            </div>
+        </div>
+
+        <div class="columnBox">
+            <div>
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName)
+                @Html.ValidationMessageFor(m => m.MiddleName)
+            </div>
+        </div>
+   </fieldset>
+    <div>
+        <input type="submit" value="Save" class="colorButton" />
+    </div>
+}
+
+
+

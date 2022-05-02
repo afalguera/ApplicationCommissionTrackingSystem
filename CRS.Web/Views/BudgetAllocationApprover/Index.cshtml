@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Budget Allocation Approver";
+}
+
+@section styles{
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/Bootstrap/bootstrap.min.css",
+        "~/Content/Bootstrap/bootstrap-responsive.min.css",
+        "~/Content/Bootstrap/bootstrap-image-gallery.min.css")
+}
+
+@section jquerylibrary{
+    @Scripts.Render("~/Scripts/jquery-2.0.2.min.js")
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/knockout-2.2.1.js",
+        "~/Scripts/jquery.blockUI.min.js",
+        "~/bundles/koBindings",
+        "~/Scripts/knockout.validation.js",
+        "~/Scripts/Application/BudgetAllocationApprover.js")
+    
+    <script src="@Url.Content("~/Scripts/autoNumeric.js")" type="text/javascript"></script>
+
+    <script id="budgetAllocationApproverTableTemplate" type="text/html">
+        <td data-bind="text: BudgetAllocationApproverCode"></td>
+        <td data-bind="text: ApproverTitle"></td>
+        <td data-bind="text: ApproverName"></td>
+        <td data-bind="text: ApproverAmountLower"></td>
+        <td data-bind="text: ApproverAmountUpper"></td>
+        <td data-bind="text: Remarks"></td>
+        <td class="tdCenter">
+            <center>
+                @if(ViewBag.PageAccess.CanEdit)
+                {
+                    <a href="#budgetAllocationApproverModal" role="link" class="edit_button" data-bind="click: $root.edit" data-toggle="modal">Edit</a>
+                }
+                @if(ViewBag.PageAccess.CanDelete)
+                {
+                    <a href="#confirmDeleteModal" role="link" class="delete_button" data-bind="click: $root.setId" data-toggle="modal">Delete</a>
+                }
+            </center>
+        </td>
+    </script>
+}
+
+@Html.Partial("_Modal", new CRS.Models.ModalViewModel("budgetAllocationApproverModal")
+{
+    Attributes = new { style = "width: auto" },
+    TitleAttributes = new { data_bind = "text: title" },
+    Body = @Html.Partial("_BudgetAllocationApproverForm"),
+    DefaultButtonText = "Save",
+    DefaultButtonAttributes = new { data_bind = "click: save" }
+})
+
+@if(ViewBag.PageAccess.CanDelete)
+{
+    @Html.Partial("_Modal", new CRS.Models.ModalViewModel("confirmDeleteModal")
+    {
+        Attributes = new { style = "width: auto, height: auto" },
+        Title = "Delete Budget Allocation Approver Details",
+        Body = MvcHtmlString.Create("<p>Continue deletion?</p>"),
+        DefaultButtonText = "Yes",
+        DefaultButtonAttributes = new { data_bind = "click: deleteBudgetAllocationApprover" },
+        CancelButtonText = "No"
+    })
+}
+
+<div class="demo">
+    <table id="budgetAllocationApproverTable" cellpadding="0" cellspacing="0" border="0" class="display"
+        data-bind="dataTable: { dataSource: items,
+			        rowTemplate: 'budgetAllocationApproverTableTemplate',
+			        columns: itemColumns, 	
+                    options: {
+				        bJQueryUI: true,
+				        bPaginate: true,
+				        bLengthChange: true,
+				        bFilter: true,
+				        bSort: true,
+				        bInfo: true,
+				        bAutoWidth: true,
+				        bProcessing: true,
+				        sPaginationType: 'full_numbers',
+				        bDeferRender: true
+			        }}">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Amount Lower</th>
+                <th>Amount Upper</th>
+                <th>Remarks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <br />
+    @if(ViewBag.PageAccess.CanAdd)
+    {
+        <a href="#budgetAllocationApproverModal" role="button" class="btn btn-primary" data-bind="click: add" data-toggle="modal">Add</a>
+    }
+</div>

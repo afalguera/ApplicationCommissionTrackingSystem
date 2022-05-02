@@ -1,0 +1,50 @@
+﻿<style type="text/css">
+       .contentHolder label {
+            font-size: small;
+            min-width: 110px;
+            vertical-align:central;
+        }
+
+        .contentHolder input[type="file"]  {
+           float: none;
+            /*width:1200px;*/
+           width:150%;
+           position: relative;
+           left:-1px;
+           background-color:#79bbff;
+        }
+
+          input[type="submit"] {
+                margin-right: 1900px ;
+                margin-top: 20px;
+           }
+        
+        
+      </style>
+@*<form action="" method="post" enctype="multipart/form-data">
+    <div class="columnBox2">
+        <div>
+          <label for="file1">Filename:</label>
+          <input type="file" name="files" id="file1" />
+        </div>  
+        <br />   
+    </div>
+</form>*@
+ @using (Ajax.BeginForm("SaveMediaLibrary", "MediaLibrary", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data", Id = "form1" }))
+ {
+    @Html.AntiForgeryToken()
+    @*<input type="file" name="files"><br>
+    <input type="submit" value="Upload File to Server">*@
+     <div class="columnBox2">
+        <div>
+              <label for="file1">Filename:</label>
+              <input type="file" name="files" id="file1" />
+        </div>    
+        <br />     
+    </div>
+     @*
+    <br />
+            <input id="btnAdd"  type="submit" class="colorButton" title="Save"  name="Save"   value="Save"  />
+            <input type="button" value="Back" onclick="history.back();" class="colorButton"/>*@
+
+ }

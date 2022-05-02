@@ -1,0 +1,21 @@
+﻿@using CRS.Helpers;
+
+@if (Request.IsAuthenticated && SessionWrapper.CurrentUser != null) {
+    <text>
+         <p>Welcome 
+             @if (SessionWrapper.UserType == UserType.Cardholder)
+             {
+                @User.Identity.Name
+             }
+             else
+             {
+                @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })    
+             }!
+         </p>
+         <p>@System.DateTime.Now.ToLongDateString() | @System.DateTime.Now.ToLongTimeString()</p>
+         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+         }
+    </text>
+}

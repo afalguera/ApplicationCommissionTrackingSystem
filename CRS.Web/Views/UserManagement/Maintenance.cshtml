@@ -1,0 +1,101 @@
+﻿<style type="text/css">
+   
+	.validationMessage { 
+		color: #FF0000; 
+		font-size:x-small;
+		display: inline-block;
+		white-space: nowrap;
+		text-align:center;
+		vertical-align: top; 
+		left:0;
+	  
+	  }
+	.input-validation-error { color: #FFA500; }
+	.input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<div id="userDiv">
+<form>
+	<fieldset>
+		<div class="columnBox">
+			<div>
+				<label>LastName</label>
+				<input type="text" data-bind="value: lastName" placeholder="LastName" />
+			</div>
+			<div>
+				<label>MiddleName</label>
+				<input type="text" data-bind="value: middleName" placeholder="MiddleName" />
+			</div> 
+			<div>
+				<label>Email</label>
+				<input type="text" data-bind="value: email" placeholder="Email" />
+			</div>
+			<div>
+				<label>Channel</label>
+				<div class="shortCombo">
+					<select id="Channel" name="Channel" data-bind="options: channelList,
+					optionsText: 'Name',
+					optionsValue: 'Code',
+					optionsCaption: 'Select Item',
+					value: channelCode"></select>
+				</div>
+			</div>  
+           	<div>
+				<label>District</label>
+				<div class="shortCombo">
+					<select id="DistrictCode" name="DistrictCode" data-bind="options: districtList, enable: enableDistrict,
+					optionsText: 'Name',
+					optionsValue: 'Code',
+					optionsCaption: 'Select Item',
+					value: districtCode"></select>
+				</div>
+			</div>
+            <div>
+                <label>Referror Code</label>
+				<input type="text" data-bind="value: referrorCode, enable: enableReferrorCode" placeholder="ReferrorCode" />
+            </div>
+			        
+		</div>
+		<div class="columnBox">
+			<div>
+				<label>FirstName</label>
+				<input type="text" data-bind="value: firstName" placeholder="FirstName" />
+			</div>
+			<div>
+				<label>Username</label>
+				<input type="text" data-bind="value: userName, enable: isAdd" placeholder="UserName" />
+			</div>
+			<div>
+				<label>Role</label>
+				<div class="shortCombo" style="display:block; color:blue;">
+					<select id="Role" name="Role" data-bind="options: roleList,
+                    optionsText: 'Name',
+					optionsValue: 'ID',
+					optionsCaption: 'Select Item',
+					value: roleId"></select>
+				</div>
+			</div>  
+			<div>
+				<label>Region</label>
+					<div class="shortCombo">
+						<select id="RegionCode" name="RegionCode" data-bind="options: regionList, enable: enableRegion,
+						optionsText: 'Name',
+						optionsValue: 'Code',
+						optionsCaption: 'Select Item',
+						value: regionCode"></select>
+					</div>
+			</div>
+            <div>
+				<label>Branch</label>
+				<div class="shortCombo">
+					<select id="BranchCode" name="BranchCode" data-bind="options: branchList, enable: enableBranch,
+                    optionsText: 'Name',
+                    optionsValue: 'Code',
+                    optionsCaption: 'Select Item',
+                    value: branchCode"></select>
+				</div>
+			</div>      
+		</div>
+	</fieldset>
+  </form>
+</div>

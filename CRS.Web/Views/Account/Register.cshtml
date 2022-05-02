@@ -1,0 +1,94 @@
+﻿@model CRS.BusinessEntities.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section jquerylibrary{
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section styles{
+    @*<style>
+        .contentHolder label
+        {
+            min-width: 100px;
+        }
+
+       
+    </style>*@
+}
+
+@ViewBag.SuccessMessage
+@using (Html.BeginForm("Register", "Account"))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+      
+         
+        
+        <div class="columnBox"> 
+            <div>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.PasswordConfirm)
+                @Html.PasswordFor(m => m.PasswordConfirm)
+                @Html.ValidationMessageFor(m => m.PasswordConfirm)
+            </div>
+        </div>
+
+       
+        
+        <div class="columnBox"> 
+            <div>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName)
+                @Html.ValidationMessageFor(m => m.MiddleName)
+            </div>
+        </div>
+
+        <div class="columnBox"> 
+            <div>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+         </div>
+
+        <div class="clear"></div>
+        <input type="submit" value="Register" class="colorButton" />
+    </fieldset>
+    
+}
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+﻿@using CRS.BusinessEntities
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Bankard ACTS</title>
+        <link href="http://fonts.googleapis.com/css?family=Dosis:300" rel="stylesheet" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet"/>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<meta name="viewport" content="width=device-width" />
+		@Styles.Render("~/Content/reset.css") 
+		
+        @Styles.Render("~/Content/datatables")
+		@Styles.Render("~/Content/bxslider") 
+        @**
+		@Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+		**@
+        @Styles.Render("~/Content/ie8.css") 
+        @Styles.Render("~/Content/ie9.css") 
+        @Styles.Render("~/Content/ie10.css") 
+		@Styles.Render("~/Content/master.css") 
+		<style>
+			#nav {
+				float: right;
+			}
+			#nav ul {
+				font-family: Arial, Verdana;
+	font-size: 20px;
+	margin: 0;
+	list-style: none;
+	padding-right: 12px;
+}
+#nav ul li {
+	display: block;
+	position: relative;
+	float: left;
+    z-index: 2;
+}
+#nav li ul {
+	display: none;
+}
+#nav ul li a {
+	
+	display: block;
+	text-decoration: none;
+	color: #ffffff;
+	border-top: 1px solid #ffffff;
+	padding: 5px 15px 5px 5px;
+	<!--background: #1e7c9a;-->
+	margin-left: 1px;
+	/*white-space: nowrap;*/
+	font-family: 'Open Sans',sans-serif;
+	
+	/*height: 19px;*/ 
+	margin-right: 1px;
+	padding: 12px 0 10px;
+	text-align: center;
+	text-decoration: none;
+	width: 138px;
+	
+}
+#nav ul li a:hover {
+<!--background: #3b3b3b;-->
+background-position: 0 0 !important;
+}
+#nav li:hover ul {
+	display: block;
+	position: absolute;
+}
+#nav li:hover li {
+	float: none;
+	font-size: 20px;
+}
+#nav li:hover a { background: #3b3b3b; }
+#nav li:hover li a:hover {
+	background: #1e7c9a;
+}
+
+		table.datatable th {color: #000000 !important }
+        /* for banner ads */
+        .bx-wrapper img {
+              display: block;
+              height: 100%;
+              margin-left: 0px;
+              width: 100%;
+              margin-top: 0px;
+         }
+
+        .bx-viewport {
+          height: 300px !important;
+          overflow: hidden;
+          position: relative;
+          width: 100% !important;
+        }
+
+        .bx-wrapper {
+           max-width: 100% !important
+        }
+        </style>
+		@RenderSection("styles", required: false)
+		@Scripts.Render("~/bundles/modernizr")
+	   
+		
+	</head>
+	<body>
+     <div style="display: none">
+        @RenderSection("featured", required: false)
+    </div>
+<div class="lineTop"></div>
+
+<div id="wrapper">
+	<div class="blueBackground"></div>
+	<div id="innerWrapper">
+		<!-- start of login part -->
+		<div class="topBody">
+			<a href="#"><div id="logoHolder"></div></a>
+			
+			<div class="float-right">
+				<section id="login">
+				  @Html.Partial("_LoginPartial")
+				</section>
+			</div>
+		</div>
+	   
+		
+		<div class="siteMsg">Application Tracking System</div>
+		
+		<!-- start of banner -->
+		@Html.Partial("_MainBanner")
+		
+		<!--end of banner-->
+ 
+		<div class="mainBottom"></div>
+		<div class="mainBody">
+		<div class="mainTop"></div>
+		<div class="mainMiddle">
+			
+            @Html.Partial("_NavBarDisplay2")
+			
+			<div class="clear"></div>
+			
+			<div class="clear contentHolder">
+			   <h1>@ViewBag.Title</h1>
+			   <span class="dottedLine"></span>
+			   @RenderBody()
+		   </div>
+		</div>
+		<div class="mainBottom"></div>
+	</div>
+		</div>
+</div>
+
+<div class="clear"></div>
+<div class="footer">
+	<div class="innerFooter">
+		<p>Copyright © 2013-2014 RCBC Bankard   |   All Rights Reserved</p>
+	</div>
+</div>
+
+	    @RenderSection("jquerylibrary", required: true)
+        <script src="~/Scripts/jquery-ui-1.10.2.min.js"></script>
+		<script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+		<script src="~/Plugins/bxslider/jquery.bxslider.min.js"></script>
+		<script src="~/Plugins/bxslider/jquery.bxslider.min.js"></script>
+		<script src="~/Plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/master.js"></script>
+        
+        <script>      
+			$('.bxslider').bxSlider({
+				mode: 'fade',
+				captions: false,
+				auto: true
+		});
+		</script> 
+	    @RenderSection("scripts", required: false)
+	</body>
+</html>

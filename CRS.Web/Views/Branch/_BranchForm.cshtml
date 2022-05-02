@@ -1,0 +1,84 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Branch Code</label>
+                <input type="text" data-bind="value: branchCode" placeholder="Branch Code" />
+            </div>
+            <div>
+                <label>Branch Name</label>
+                <input type="text" data-bind="value: branchName" placeholder="Branch Name" />
+            </div>
+            <div>
+                <label>TIN</label>
+                <input type="text" data-bind="value: tin" placeholder="TIN" />
+            </div>
+            <div>
+                <label>Account Name</label>
+                <input type="text" data-bind="value: accountName" placeholder="Account Name" />
+            </div>
+            <div>
+                <label>Account Number</label>
+                <input type="text" data-bind="value: accountNumber" placeholder="Account Number" />
+            </div>
+            <div>
+                <label>Bank Branch</label>
+                <input type="text" data-bind="value: bankBranch" placeholder="Bank Branch" />
+            </div>
+            <div>
+                <label>Is YGC</label>
+                <input type="checkbox" data-bind="checked: isYGC" />
+            </div>
+            <div>
+			    <label>Channel:</label>
+			    <div class="shortCombo">
+					    <select id="ddChannel" data-bind="options: channelList, enable: enableChannel,
+                                                        optionsText: 'Name',
+                                                        optionsValue: 'Code',
+                                                        value: selectedChannel,
+                                                        optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+		    <div>
+			    <label>Region:</label>
+			    <div class="shortCombo">
+					    <select id="ddRegion" data-bind="options: regionList, enable: enableRegion,
+                                                        optionsText: 'Name',
+                                                        optionsValue: 'Code',
+                                                        value: selectedRegion,
+                                                        optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+            <div>
+			    <label>District:</label>
+			    <div class="shortCombo">
+					    <select id="ddDistrict" data-bind="options: districtList, enable: enableDistrict,
+                                                        optionsText: 'Name',
+                                                        optionsValue: 'Code',
+                                                        value: selectedDistrict,
+                                                        optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>	
+            <div>
+                <label>Manager:</label>
+                <div style="float:left; font-size:x-small;margin-left:0px; margin-top:0px;display:inline-flexbox;overflow-x:hidden">
+                    <a  href="#employeeSelectorModal" data-toggle="modal" data-bind="text: employeeSelectedDisplay, value: employeeSelected" title="Choose"></a>
+                    <a style="color:red;font-weight:bolder;margin-left:5px" data-bind="click: clearEmployee" title="Clear" href="#">X</a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

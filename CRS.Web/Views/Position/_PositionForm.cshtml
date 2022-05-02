@@ -1,0 +1,27 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Position Code</label>
+                <input type="text" data-bind="value: positionCode" placeholder="Position Code" />
+            </div>
+            <div>
+                <label>Position Name</label>
+                <input type="text" data-bind="value: positionName" placeholder="Position Name" />
+            </div>           
+        </div>
+    </fieldset>
+</form>

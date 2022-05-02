@@ -1,0 +1,65 @@
+﻿@model CRS.BusinessEntities.RolePageAccess
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+   <script type="text/javascript">
+       $(".colorButton").removeAttr('style').css("width", "100px");
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>New</legend>
+           <ol class="tableFixer">
+            <li>
+                @Html.HiddenFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PageId)
+                @Html.DropDownListFor(m => m.PageId, new SelectList(ViewBag.AvailPages, "Id", "Title", 0))
+
+            </li>
+           <li>
+               <div>@Html.LabelFor(m => m.CanAdd)</div>
+               <div>@Html.CheckBoxFor(m => m.CanAdd)</div>
+                
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanEdit)</div>
+                <div>@Html.CheckBoxFor(m => m.CanEdit)</div>
+                
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanDelete)</div>
+                <div>@Html.CheckBoxFor(m => m.CanDelete)</div>
+               
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanView)</div>
+                <div>@Html.CheckBoxFor(m => m.CanView)</div>
+             </li>
+            <li>  
+                <div>@Html.LabelFor(m => m.CanPrint)</div>
+                <div>@Html.CheckBoxFor(m => m.CanPrint)</div>
+            </li> 
+        </ol>
+        <br />
+        <input type="submit" value="Save" class="colorButton"/>
+        <input type="button" value="Back" onclick="history.back();" class="colorButton"/>
+        
+    </fieldset>
+    
+}
+
+

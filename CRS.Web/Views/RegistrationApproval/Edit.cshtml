@@ -1,0 +1,65 @@
+﻿@model CRS.BusinessEntities.User
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section jquerylibrary{
+     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@using (Html.BeginForm())
+{
+    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit For</legend>
+          <ol class="tableFixer">
+            <li>
+                @Html.HiddenFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @readonly = true })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @readonly = true })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName,new { @readonly = true })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName,new { @readonly = true })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName,new { @readonly = true })
+            </li>
+            
+            <li>  
+                @Html.LabelFor(m => m.Channel)
+                @Html.DropDownListFor(m => m.Channel, new SelectList(ViewBag.Channels, "Code", "Name", 0))
+
+            </li> 
+            
+            <li>  
+                @Html.LabelFor(m => m.Role)
+                @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.Roles, "Id", "Name", 0))
+                 
+            </li>
+            
+            
+            
+            
+        </ol>
+        <input type="submit" value="Save" />
+        
+    </fieldset>
+    
+}

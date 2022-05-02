@@ -1,0 +1,27 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Region Code</label>
+                <input type="text" data-bind="value: regionCode" placeholder="Region Code" />
+            </div>
+            <div>
+                <label>Region Name</label>
+                <input type="text" data-bind="value: regionName" placeholder="Region Name" />
+            </div>           
+        </div>
+    </fieldset>
+</form>

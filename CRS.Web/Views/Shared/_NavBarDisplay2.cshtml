@@ -1,0 +1,23 @@
+﻿@using CRS.BusinessEntities
+@using CRS.Helpers
+
+@{
+    if (Request.IsAuthenticated && SessionWrapper.PageAccess != null && SessionWrapper.PageAccess.Count > 0)
+    {
+        @Html.Raw("<div id='nav'><ul class='dropdown'>")
+        foreach(Module module in SessionWrapper.Modules)
+        {
+            IEnumerable<UserPageAccess> pageAccessList = SessionWrapper.PageAccess.Where(p => p.ModuleId == module.ID);
+            if (pageAccessList.Count() > 0)
+            {
+                @Html.Raw(string.Format("<li><a href='#'>{0}</a><ul>", module.Name))
+                foreach(UserPageAccess pageAccess in pageAccessList)
+                {
+                    @Html.Raw(string.Format("<li><a href='{0}'>{1}</a></li>", Url.Action("Index", pageAccess.PageName), pageAccess.PageTitle))
+                }
+                @Html.Raw("</ul></li>")
+            }
+        }
+        @Html.Raw("</ul></div><br/><br/><br/><br/><br/>")
+    }
+}

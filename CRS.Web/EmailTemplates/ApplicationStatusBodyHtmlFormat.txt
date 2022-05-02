@@ -1,0 +1,52 @@
+<html><head></head>
+<body>
+To:&nbsp;Application Tracking System Webmaster
+<br/>
+<br/>
+<br/>
+	<p style="margin-left:30px;">Application status email notification</p>
+    <div style="margin:30px;">
+	    <table border="1" cellpadding="5" cellspacing="1" width="60%">
+		<tr>
+		    <td width="40%">DATE:</td><td width="60%">$EmailDate$</td>
+	    </tr>
+	    <tr>
+	        <td width="40%">APPLICANT NAME:</td><td width="60%">$ApplicantName$</td>
+	    </tr>
+	    <tr>
+		    <td width="40%">APPLICATION NO:</td><td width="60%">$ApplicationNo$</td>
+	    </tr>
+		<tr>
+		    <td width="40%">SOURCE CODE:</td><td width="60%">$SourceCode$</td>
+	    </tr>
+	    <tr>
+		    <td width="40%">ENCODED DATE:</td><td width="60%">$EncodedDate$</td>
+	    </tr>
+		<tr>
+		    <td width="40%">STATUS DATE:</td><td width="60%">$StatusDate$</td>
+	    </tr>
+		<tr>
+		    <td width="40%">CARD BRAND:</td><td width="60%">$CardBrand$</td>
+	    </tr>
+			<tr>
+		    <td width="40%">CARD TYPE:</td><td width="60%">$CardType$</td>
+	    </tr>
+		<tr>
+		    <td width="40%">REASON:</td><td width="60%">$Reasons$</td>
+	    </tr>	 
+	    <tr>
+		    <td width="40%">REMARKS:</td><td width="60%">$Remarks$</td>
+	    </tr>	
+		<tr>
+		    <td width="40%">USER:</td><td width="60%">$User$</td>
+	    </tr>	        
+	    </table>
+    </div>	
+    <p style="margin-left:30px;">Please contact your System Administrator for immediate concerns. </p>
+	<br/><br/>
+    <p style="margin-left:30px;">Thank You.</p>
+</body>
+</html>
+	
+
+	

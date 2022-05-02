@@ -1,0 +1,112 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <div>
+                    <label>Channel Name</label>
+                    <div class="shortCombo">
+					    <select id="ddChannel" data-bind="options: channelList, enable: enableChannel,
+                            optionsText: 'Name',
+                            optionsValue: 'Code',
+                            value: channelCode,
+                            optionsCaption: '-- All --'" ></select>
+			        </div>
+                </div>
+                <div>
+                    <label>Year</label>
+                    <input id="txtYear" type="text" maxlength="4" data-bind="value: year" placeholder="Year" />
+                </div> 
+              @*  <div>
+                    <label>YTD Target</label>
+                    <input id="txtYTDTarget" type="text" maxlength="9" data-bind="value: ytdTarget" placeholder="YTDTarget" />
+                </div>*@
+                <div>
+                    <label>Apply per Month</label>
+				    <input type="checkbox" data-bind="checked: isOneValue" />    
+                </div>
+                <div id="divOneValue">
+                    <div>
+                        <label>Monthly Value:</label>
+                        <input id="txtMTMAll" type="text" maxlength="10" data-bind="value: mtmAll" />
+                    </div>
+                </div>
+                <div id="divMonths">
+                    <div>
+                        <label>Jan</label>
+                        <input id="txtMTM1" type="text" maxlength="10" data-bind="value: mtm1" placeholder="Jan" />
+                    </div> 
+                    <div>
+                        <label>Feb</label>
+                        <input id="txtMTM2" type="text" maxlength="10" data-bind="value: mtm2" placeholder="Feb" />
+                    </div> 
+                    <div>
+                        <label>Mar</label>
+                        <input id="txtMTM3" type="text" maxlength="10" data-bind="value: mtm3" placeholder="Mar" />
+                    </div> 
+                    <div>
+                        <label>Apr</label>
+                        <input id="txtMTM4" type="text" maxlength="10" data-bind="value: mtm4" placeholder="Apr" />
+                    </div> 
+                    <div>
+                        <label>May</label>
+                        <input id="txtMTM5" type="text" maxlength="10" data-bind="value: mtm5" placeholder="May" />
+                    </div>
+                    <div>
+                        <label>Jun</label>
+                        <input id="txtMTM6" type="text" maxlength="10" data-bind="value: mtm6" placeholder="Jun" />
+                    </div>
+                     <div>
+                        <label>Jul</label>
+                        <input id="txtMTM7" type="text" maxlength="10" data-bind="value: mtm7" placeholder="Jul" />
+                    </div> 
+                    <div>
+                        <label>Aug</label>
+                        <input id="txtMTM8" type="text" maxlength="10" data-bind="value: mtm8" placeholder="Aug" />
+                    </div> 
+                    <div>
+                        <label>Sep</label>
+                        <input id="txtMTM9" type="text" maxlength="10" data-bind="value: mtm9" placeholder="Sep" />
+                    </div> 
+                    <div>
+                        <label>Oct</label>
+                        <input id="txtMTM10" type="text" maxlength="10" data-bind="value: mtm10" placeholder="Oct" />
+                    </div> 
+                    <div>
+                        <label>Nov</label>
+                        <input id="txtMTM11" type="text" maxlength="10" data-bind="value: mtm11" placeholder="Nov" />
+                    </div>
+                    <div>
+                        <label>Dec</label>
+                        <input id="txtMTM12" type="text" maxlength="10" data-bind="value: mtm12" placeholder="Dec" />
+                    </div>
+                </div>
+                
+               @* <div>
+                    <label>Full Year Run Rate</label>
+                    <input id="txtFullYearRunRate" type="text" maxlength="9" data-bind="value: fullYearRunRate" placeholder="FullYearRunRate" />
+                </div>  
+                <div>
+                    <label>MTD Target Booking</label>
+                    <input id="txtMTDTargetBooking" type="text" maxlength="9" data-bind="value: mtdTargetBooking" placeholder="MTDTargetBooking" />
+                </div>
+                <div>
+                    <label>Full Year Target</label>
+                    <input id="txtFullYearTarget" type="text" maxlength="9" data-bind="value: fullYearTarget" placeholder="FullYearTarget" />
+                </div>*@
+            </div>
+        </div>
+    </fieldset>
+</form>

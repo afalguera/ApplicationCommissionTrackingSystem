@@ -1,0 +1,16 @@
+﻿@using CRS.BusinessEntities
+
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (BranchManager bm in ViewBag.BranchManagers)
+{
+    
+    <li>
+        @bm.FirstName @bm.MiddleName @bm.LastName   
+    </li>
+}

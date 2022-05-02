@@ -1,0 +1,47 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Card Type Code</label>
+                <input type="text" data-bind="value: cardTypeCode" placeholder="Card Type Code" />
+            </div>
+            <div>
+                <label>Card Type Name</label>
+                <input type="text" data-bind="value: cardTypeName" placeholder="Card Type Name" />
+            </div>           
+            <div>
+			     <label>Card Brand:</label>
+			     <div class="shortCombo">
+						    <select id="ddCardBrand" data-bind="options: cardBrandList, enable: enableCardBrand,
+                            optionsText: 'CardBrandName',
+                            optionsValue: 'CardBrandCode',
+                            value: cardBrandCode,
+                            optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+            <div>
+			     <label>Card Sub Type:</label>
+			     <div class="shortCombo">
+						    <select id="ddCardSubType" data-bind="options: cardSubTypeList, 
+                                                                optionsText: 'Name',
+                                                                optionsValue: 'Code',
+                                                                value: selectedCardSubType,
+                                                                optionsCaption: '-- All --'" ></select>
+			    </div>
+		    </div>
+        </div>
+    </fieldset>
+</form>

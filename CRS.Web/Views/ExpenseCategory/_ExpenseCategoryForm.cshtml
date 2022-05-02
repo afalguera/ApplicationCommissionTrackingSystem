@@ -1,0 +1,27 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Expense Category Code</label>
+                <input type="text" data-bind="value: expenseCategoryCode" placeholder="Expense Category Code" />
+            </div>
+            <div>
+                <label>Expense Category Name</label>
+                <input type="text" data-bind="value: expenseCategoryName" placeholder="Expense Category Name" />
+            </div>           
+        </div>
+    </fieldset>
+</form>

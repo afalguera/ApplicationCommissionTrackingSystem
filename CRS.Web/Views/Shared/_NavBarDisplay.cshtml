@@ -1,0 +1,84 @@
+﻿@using CRS.BusinessEntities
+
+
+@{
+               
+   var menutodisplay = "";
+   
+   if (CRS.Helpers.SessionWrapper.PageAccess != null)
+   {
+
+   IEnumerable<UserPageAccess> adminmenu = CRS.Helpers.SessionWrapper.PageAccess.Where<UserPageAccess>(
+                                      m => m.PageId == 11 || m.PageId == 12 || m.PageId == 13 ||
+                                      m.PageId == 15 || m.PageId == 16 || m.PageId == 17);
+
+
+
+   System.Text.StringBuilder rootbar = new System.Text.StringBuilder();
+  
+   foreach (UserPageAccess lst in adminmenu)
+   {
+       string url = Url.Action("Index", lst.PageName);
+       
+       rootbar.Append("<li><a href='").Append(url).Append("'><i class='icon-wrench icon-black'></i>").Append(lst.PageTitle).Append("</a></li>"); 
+   }
+    
+    if (Request.IsAuthenticated)
+    {
+        if (CRS.Helpers.SessionWrapper.PageAccess != null)
+       {
+            var liList = "";
+            menutodisplay = "<div class='navbar'>" +
+                  "<div class='navbar-inner'>" +
+                    "<div class='container'>" +
+      "<a class='btn btn-navbar' data-toggle='collapse' data-target='.nav-collapse'>" +
+       " <span class='icon-bar'></span>" +
+       " <span class='icon-bar'></span>" +
+       " <span class='icon-bar'></span>" +
+      "</a>" +
+     "<div class='nav-collapse'>" +
+      "  <ul class='nav'>" +
+       
+      "   <li><a href='" + Url.Action("Index","ApplicationStatus") + "'><i class='icon-flag icon-white'></i> Application Status</a></li> "+
+       "   <li><a href='#'><i class='icon-gift icon-white'></i> Commission</a></li> " +
+       "   <li><a href='" + Url.Action("Index", "RedeemPoints") + "'><i class='icon-shopping-cart icon-white'></i> Redemption</a></li> " +
+       
+       "   <li class='dropdown'> " +
+       "     <a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-list-alt icon-white'></i> Reports <b class='caret'></b></a> " +
+       "     <ul class='dropdown-menu'> " +
+       "       <li><a href='#'><i class='icon-list-alt icon-black'></i> Report 1</a></li> " +
+       "       <li><a href='#'><i class='icon-list-alt icon-black'></i> Report 2</a></li>" +
+       "       <li class='divider'></li>" +
+       "       <li class='nav-header'>Summary Reports</li>" +
+       "       <li><a href='#'><i class='icon-list-alt icon-black'></i> Report 3</a></li>" +
+        "      <li><a href='#'><i class='icon-list-alt icon-black'></i> Report 4</a></li>" +
+         "   </ul>" +
+         " </li>" +
+         " <li class='dropdown'>" +
+         "   <a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-wrench icon-white'></i> Administration <b class='caret'></b></a>" +
+         "   <ul class='dropdown-menu'> " +
+         @**
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Media Library</a></li> " +
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Banner Ads</a></li> " +
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Redemption Items</a></li> " +
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Registration Approval</a></li> " +
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Roles</a></li> " +
+         "     <li><a href='#'><i class='icon-wrench icon-black'></i> Role Page Access</a></li> " +
+         **@
+          rootbar.ToString() + 
+         "   </ul> " +
+         " </li> " +
+        "</ul> " +
+       "</div> " +
+    "</div>" +
+  "</div> " +
+"</div>";
+            
+        }
+    }
+                
+               
+  }
+  }
+
+@Html.Raw(menutodisplay)

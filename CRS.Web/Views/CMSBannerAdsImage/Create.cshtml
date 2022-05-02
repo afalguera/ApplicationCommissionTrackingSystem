@@ -1,0 +1,167 @@
+﻿@model CRS.BusinessEntities.CMSBannerAdsImage
+@{
+    ViewBag.Title = "New";
+}
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#listtable').dataTable({
+            "sScrollY": 200,
+            "sPaginationType": "full_numbers"
+        });
+
+    
+        $("#Dialog-Box").dialog({
+            resizable: false,
+            height: 800,
+            width: 1280,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "Select Image": function () {
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        function OpenDialog() {
+            $('#Dialog-Box').dialog('open');
+        }
+     
+        $(document).ready(function () {
+           $(".date").datepicker();
+            $(".galImg").click(function () {
+                var image = $(this).attr("rel");
+                $('#feature').fadeOut('slow', function () {
+                    $('#feature').html('<img src="' + image + '"/>');
+                    $('#feature').fadeIn('slow');
+                    $("#ImagePath").val(image)
+                });
+            });
+
+            var thumbs = $(".thumb");
+            $.each(thumbs, function (i, val) {
+                var img = new Image();
+                img.src = $(this).attr("src");
+                var width = img.width;
+                var height = img.height;
+                var dimension = width + 'x' + height;
+                $(this).attr('title', dimension);
+            });
+        });
+
+       $(function () {
+             $('#Channel').change(function () {
+               $.getJSON('/CMSBannerAdsImage/RoleList/' + $(this).val(),
+               function (data) {
+                   var items = '';
+                    $.each(data, function (i, role) {
+                        items += "<option value='" + role.Value + "'>" + role.Text + "</option>";
+                    });
+
+                   $('#SelectedRole').html(items);
+               });
+            });
+       });
+
+       $(".colorButton").removeAttr('style').css("width", "100px");
+      </script>
+}
+
+
+@section styles {
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+		#gallery {overflow: auto; min-height: 470px;}
+		.thumbs {width: 1200px; float: left; text-align:center; }
+		#feature {width: 100%; float:right; margin: 10px; text-align:center;}
+		#feature img {border: 4px solid #ccc;}
+		.thumb{border: 4px solid #ccc; margin: 4px; max-width:200px;max-height:200px;}
+		footer p{text-align: center}
+	</style>
+}
+
+
+
+<div id="Dialog-Box">
+      <div id="gallery">
+			<div id="feature"><img id="defimg"  src="/Media/@Path.GetFileName(@ViewBag.DefaultImage)" border="0"/></div>
+			<div class="thumbs">
+			@foreach (string tmp in ViewBag.ImageFiles)
+            {
+                <a href="#" rel="/Media/@Path.GetFileName(tmp)" class="galImg"><img src="/Media/@Path.GetFileName(tmp)" class="thumb"  title="testing" border="0"/></a>
+            }
+            </div>
+      </div>
+ 
+</div>
+
+<button class="buttonBlue" onclick="OpenDialog()">Select image</button>
+                
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+       
+        <ol class="tableFixer">
+            <li>
+                @Html.HiddenFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ImagePath)
+                @Html.TextBoxFor(m => m.ImagePath)
+                @Html.ValidationMessageFor(m => m.ImagePath)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.TargetUrl)
+                @Html.TextBoxFor(m => m.TargetUrl)
+                @Html.ValidationMessageFor(m => m.TargetUrl)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ImageName)
+                @Html.TextBoxFor(m => m.ImageName)
+                @Html.ValidationMessageFor(m => m.ImageName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Channel)
+                @Html.DropDownListFor(m => m.Channel, new SelectList(ViewBag.Channels, "Code", "Name", 0))
+                @Html.ValidationMessageFor(m => m.Channel) 
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RoleId)
+                @Html.DropDownListFor(m => m.RoleId, Enumerable.Empty<SelectListItem>(), new { @id = "SelectedRole", @name = "Role" })
+                @Html.ValidationMessageFor(m => m.RoleId)
+            </li>
+             <li>
+                @Html.LabelFor(m => m.PeriodFrom)
+                @Html.TextBoxFor(m => m.PeriodFrom,new { @class = "date" } )
+                @Html.ValidationMessageFor(m => m.PeriodFrom)
+            </li>
+             <li>
+                @Html.LabelFor(m => m.PeriodTo)
+                @Html.TextBoxFor(m => m.PeriodTo, new { @class = "date" })
+                @Html.ValidationMessageFor(m => m.PeriodTo)
+            </li>
+        </ol>
+        <br />
+         <input type="submit" value="Save" class="colorButton"/>
+         <input type="button" value="Back" onclick="history.back();" class="colorButton"/>
+    </fieldset>
+    
+}
+
+
+
+
+
+
+

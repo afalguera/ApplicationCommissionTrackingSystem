@@ -1,0 +1,27 @@
+﻿@using CRS.BusinessEntities
+
+@{
+               
+   var menutodisplay = "";
+    if (Request.IsAuthenticated)
+    {
+        if (CRS.Helpers.SessionWrapper.PageAccess != null)
+       {
+            var liList = "";
+            menutodisplay = "<div id='verticalmenu'> " + 
+                        "<ul>";
+            foreach (UserPageAccess lst in CRS.Helpers.SessionWrapper.PageAccess)
+            {
+                liList += "<li>" +
+                Html.ActionLink(lst.PageTitle,"Index",lst.PageName) +
+                "</li>";
+            }
+        menutodisplay += liList + "</ul>" +
+                    "</div>"; 
+        }
+    }
+                
+               
+  }
+
+@Html.Raw(menutodisplay)

@@ -1,0 +1,213 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: inline-block;
+        white-space: nowrap;
+        text-align:center;
+        vertical-align: top; 
+        left:0;
+        margin-top:-10px;
+      
+      }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+@helper CreateTitle(string indicator)
+{
+    foreach(char character in indicator)
+    {
+        if (char.IsUpper(character) && !object.ReferenceEquals(indicator[0], character))
+        {
+            @Html.Raw(" ")
+        }
+        @Html.Raw(character)
+    }
+}
+
+@helper RenderIndicators(IDictionary<string, IList<int>> indicatorDictionary)
+{
+    foreach(var indicator in indicatorDictionary)
+    {
+        <tr>
+            <td style="text-align:center; vertical-align:middle">
+                <input type="checkbox" data-bind="checked: @indicator.Key.Insert(0, "is")" style="vertical-align:middle" />
+            </td>
+            <td style="text-align:center; vertical-align:middle">
+                Is @CreateTitle(indicator.Key)
+            </td>
+            <td style="text-align:center; vertical-align:middle">
+                @if(indicator.Value.Contains(0))
+                {
+                    <input class="txtDynamicRate" type="text" data-bind="enable: @string.Format("is{0}()", indicator.Key), 
+                        value: @string.Concat(Char.ToLower(indicator.Key[0]), indicator.Key.Substring(1), "Rate")" />
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td style="text-align:center; vertical-align:middle">
+                @if(indicator.Value.Contains(1))
+                {
+                    <input class="txtDynamicCount" type="text" data-bind="enable: @string.Format("is{0}()", indicator.Key),
+                        value: @string.Concat(Char.ToLower(indicator.Key[0]), indicator.Key.Substring(1), "Count")" />
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+            <td style="text-align:center; vertical-align:middle">
+                @if(indicator.Value.Contains(2))
+                {
+                    <input class="txtDynamicPoints" type="text" data-bind="enable: @string.Format("is{0}()", indicator.Key),
+                        value: @string.Concat(Char.ToLower(indicator.Key[0]), indicator.Key.Substring(1), "Points")" />
+                }
+                else
+                {
+                    @Html.Raw("N/A")
+                }
+            </td>
+        </tr>
+    }
+}
+<div id="channelDetailsPopup">
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Channel Name</label>
+                <div class="shortCombo">
+                    <select data-bind="options: channels, optionsText: 'Name', optionsValue: 'Id',
+                            optionsCaption: 'Select Item',
+                            value: channelId"></select>
+                </div>
+            </div>
+            <div>
+                <label>Commission Rate</label>
+                <input id="txtChannelRate" type="text" data-bind="value: commRate" placeholder="Commission Rate" />
+            </div>
+            <div>
+                <label>Is Card Brand</label>
+                <input type="checkbox" data-bind="checked: isCardBrand" />
+            </div>
+            <div>
+                <label>Effective Start Date</label>
+                <input id="dtEFfStartDate" type="text" data-bind="value: effectiveStartDate" placeholder="Effective Start Date" />
+            </div>
+            <div>
+                <label>Tax Rate (%)</label>
+                <input id="txtTaxRate" type="text" data-bind="value: taxRate" placeholder="Tax Rate" />
+            </div>
+            <div>
+                <label>Is Car Dealer</label>
+                <input type="checkbox" data-bind="checked: isCarDealer" />
+            </div>
+            <div>
+                <label>SERate</label>
+                <input id="txtSERate" type="text" data-bind="enable: isCarDealer(), value: seRate" placeholder="SE Rate" />
+            </div>
+            <div>
+                <label>Is Branch Incentive</label>
+                <input type="checkbox" data-bind="checked: isBranchIncentive" />
+            </div>
+            <div>
+                <label>Rate</label>
+                <input id="txtBranchIncentiveRate" type="text" data-bind="enable: isBranchIncentive(), value: branchIncentiveRate" placeholder="Rate" />
+            </div>
+            <div>
+                 <label>Main Branch Name</label>
+                <input id="txtMainBranchName" type="text" data-bind="enable: isBranchIncentive(), value: mainBranchName" placeholder="Main Branch Name" />
+            </div>
+        </div>
+
+        <div class="columnBox">
+            <div>&nbsp;</div>
+            <div>
+                <label>Commission Points</label>
+                <input id="txtCommPoints" type="text" data-bind="value: commPoints" placeholder="Commission Points" />
+            </div>
+            <div>
+                <label>Is Card Type</label>
+                <input type="checkbox" data-bind="checked: isCardType" />
+            </div>
+            <div>
+                <label>Effective End Date</label>
+                <input id="dtEffEndDate"  type="text" data-bind="value: effectiveEndDate" placeholder="Effective End Date" />
+            </div>
+            <div>
+                <label>Is Credit To Branch</label>
+                <input type="checkbox" data-bind="checked: isCreditToBranch" />
+            </div>
+            <div></div>
+            <div>
+                <label>Non-SE Rate</label>
+                <input id="txtNonSERate" type="text" data-bind="enable: isCarDealer(), value: nonSERate" placeholder="Non-SE Rate" />
+            </div>
+            <div></div>
+            <div>
+                <label>Count</label>
+                <input id="txtBranchIncentiveCount" type="text" data-bind="enable: isBranchIncentive(), value: branchIncentiveCount" placeholder="Count" />
+            </div>
+            <div>
+                <label>Secondary Branch Name</label>
+                <input id="txtBranchSecondaryName" type="text" data-bind="enable: isBranchIncentive(), value: secondaryBranchName" placeholder="Secondary Branch Name" />
+            </div>
+           
+               
+          @*  <div>
+                <label>Is Branch Incentive</label>
+                <input type="checkbox" data-bind="checked: isBranchIncentive" />
+                <label>Rate</label>
+                <input type="text" data-bind="enable: isBranchIncentive(), value: branchIncentiveRate" placeholder="Rate" />
+                <label>Count</label>
+                <input type="text" data-bind="enable: isBranchIncentive(), value: branchIncentiveCount" placeholder="Count" />
+                <label>Main Branch Name</label>
+                <input type="text" data-bind="enable: isBranchIncentive(), value: mainBranchName" placeholder="Main Branch Name" />
+                <label>Secondary Branch Name</label>
+                <input type="text" data-bind="enable: isBranchIncentive(), value: secondaryBranchName" placeholder="Secondary Branch Name" />
+            </div>*@
+        </div>
+       @* <div>
+             <div>
+                <label>Is Car Dealer</label>
+                <input type="checkbox" data-bind="checked: isCarDealer" />
+                <label>SERate</label>
+                <input type="text" data-bind="enable: isCarDealer(), value: seRate" placeholder="SE Rate" />
+                <label>Non-SE Rate</label>
+                <input type="text" data-bind="enable: isCarDealer(), value: nonSERate" placeholder="Non-SE Rate" />
+            </div>
+
+        </div>*@
+
+       
+
+    </fieldset>
+    <fieldset>
+        <table cellpadding="0" cellspacing="0" border="0" class="display">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Count</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+               @RenderIndicators(new Dictionary<string, IList<int>>() 
+                {
+                    { "Tiering", new[] { 0, 1, 2 } },
+                    { "Usage", new[] { 0, 1, 2 } },
+                    { "Inflows", new[] { 0, 1, 2 } },
+                    //{ "CoreBrand", new[] { 0 } },
+                    { "InflowIncentive", new[] { 0, 1 } },
+                    { "ForEveryCountIncentive",  new[] { 0, 1 } },
+                })
+            </tbody>
+        </table>
+    </fieldset>
+</form>
+</div>

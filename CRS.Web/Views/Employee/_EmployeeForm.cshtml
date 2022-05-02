@@ -1,0 +1,91 @@
+﻿<div id="EmployeeFormModal" style="width:50%">
+<style type="text/css">
+   
+    .validationMessage { 
+		color: #FF0000; 
+		font-size:x-small;
+		display: inline-block;
+		white-space: nowrap;
+		text-align:center;
+		vertical-align: top; 
+		left:0;
+	  
+	  }
+	.input-validation-error { color: #FFA500; }
+	.input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+             <div>
+                <label>Last Name</label>
+                <input type="text" data-bind="value: lastName" placeholder="Last Name" />
+            </div>
+             <div>
+                <label>First Name</label>
+                <input type="text" data-bind="value: firstName" placeholder="First Name" />
+            </div>
+              <div>
+                <label>Middle Name</label>
+                <input type="text" data-bind="value: middleName" placeholder="Middle Name" />
+            </div>    
+             <div>
+                <label>Employee Number</label>
+                <input type="text" data-bind="value: employeeNumber" placeholder="Employee Number" />
+            </div>
+            <div>
+                <label>Is Active</label>
+                <input type="checkbox" class="checkbox" data-bind="check: isActive" />
+            </div>
+            <div>
+				<label>Channel</label>
+				<div class="shortCombo">
+					<select id="Channel" name="Channel" data-bind="options: channelList,
+                                                                    optionsText: 'Name',
+                                                                    optionsValue: 'Code',
+                                                                    optionsCaption: 'Select Item',
+                                                                    value: channelCode"></select>
+				</div>
+	        </div>
+            <div>
+				<label>Region</label>
+				<div class="shortCombo">
+						<select id="RegionCode" name="RegionCode" data-bind="options: regionList, enable: enableRegion,
+                                                                                optionsText: 'Name',
+                                                                                optionsValue: 'Code',
+                                                                                optionsCaption: 'Select Item',
+                                                                                value: regionCode"></select>
+				</div>
+		    </div>  
+            <div>
+				<label>District</label>
+				<div class="shortCombo">
+					<select id="DistrictCode" name="DistrictCode" data-bind="options: districtList, enable: enableDistrict,
+                                                                            optionsText: 'Name',
+                                                                            optionsValue: 'Code',
+                                                                            optionsCaption: 'Select Item',
+                                                                            value: districtCode"></select>
+				</div>
+		    </div>
+            <div>
+				<label>Branch</label>
+				<div class="shortCombo">
+					<select id="BranchCode" name="BranchCode" data-bind="options: branchList, enable: enableBranch,
+                                                                            optionsText: 'Name',
+                                                                            optionsValue: 'Code',
+                                                                            optionsCaption: 'Select Item',
+                                                                            value: branchCode"></select>
+				</div>
+		    </div>   
+        </div>
+        
+        @*<div class="columnBox">*@
+       @* <div>
+            @Html.Partial("_CascadingLocator", new CRS.Models.CascadingLocator { UseBranchId = true })
+        </div>*@
+       @* </div>*@
+     
+    </fieldset>
+</form>
+</div>

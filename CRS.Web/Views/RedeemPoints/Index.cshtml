@@ -1,0 +1,292 @@
+﻿@using CRS.BusinessEntities
+@using CRS.Helpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section jquerylibrary{
+     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section styles {
+    <style>
+
+        #body {
+          background-color:white;
+        }
+
+        #redemptionitems {
+            background-color:white;
+            border-style:none;
+        }
+        #redemptionitems > div {
+            width: 1200px; 
+            float: left; 
+            text-align:left; 
+            background-color:white;
+            height:300px;
+            width:300px;
+            border-style:none;
+            border-width:medium;
+            margin: 1000px, 1000px,1000px, 1000px;
+            overflow:auto;
+        }
+
+        #redemptionitems .itemname {
+            text-align:left;
+            font-family:Arial;
+
+        }
+
+        #redemptionitems .pointsrequired {
+            text-align:left;
+            font-family:'Century Gothic';
+        }
+        
+        #redemptionitems .checkbox {
+            left: 111px;
+            position: relative;
+            top: 29px;
+            z-index: 99;
+        }
+
+       #redemptionitems .checkbox:hover {
+            cursor:pointer;
+       }
+         
+        #redemptionitems .imagediv {
+            height: 150px;
+        }   
+		
+        #msgpoints {
+            position:fixed;
+            top:100px;
+            left:100px;
+            font-size:larger;
+            font-style:oblique;
+            font-weight:300;
+            font-family:'Script MT';
+            border-style:ridge;
+            z-index:100;
+            height:100px;
+            background: white;
+            border: 1px double #DDD;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #333;
+            color: #666;
+            float: left;
+            padding: 5px 10px;
+            outline: none;
+        }
+
+        #btnRedeemPoints {
+            float: left;
+        }
+
+        div.rounded {
+	background-color: #666;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px; }
+        /*
+        #overlay.currently-loading img {
+            display: block; 
+            width: 100%;
+            height: 100%;
+            
+        }
+
+        #overlay img  {
+            display:none;
+         }
+            */
+
+	</style>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var intTickedItemCount;
+        var computedavailpoints;
+        var cpt = 0;
+
+        var redeemedcntObj = new Object();
+
+        redeemedcntObj.UserId = '@SessionWrapper.CurrentUser.ID';
+
+        function GetRedeemedCount() {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: '@Url.Content("/api/RedeemPointsAPI/")' + redeemedcntObj.UserId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (parseInt(data) > 0) {
+                            $('#msgpoints > div:first-child').html('You have ' + data + ' items pending redemption ');
+                            $('#msgpoints > div#btnRedeemPoints > input').attr('value', 'Cancel Redeem Points');
+                        }
+                    },
+                    error: function (e) {
+                        alert(e);
+                    }
+                });
+            }
+
+
+        $(document).ready(function () {
+
+            intTickedItemCount = 0;
+            intComputedAvailPoints = 0;
+
+            GetRedeemedCount();
+            
+            $('#btnRedeemPoints > input').click(function (e) {
+
+                var btnCaption = $('#msgpoints > div#btnRedeemPoints > input').attr('value');
+                if (btnCaption == 'Cancel Redeem Points') {
+                    var sConfirmMsg = ' Are you sure you wish cancel?';
+                    if (confirm(sConfirmMsg)) {
+
+
+                        var myObject = new Object();
+                        myObject.ID = '1';
+                        myObject.CancelUserID = '@SessionWrapper.CurrentUser.ID';
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Content("/api/RedeemPointsAPI/cancel")',
+                            cache: false,
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(myObject),
+                            success: function (data) {
+                                location.reload();
+                            }
+                        });
+                        
+                        //GetRedeemedCount();
+                       
+
+
+                    } else {
+                        //do nothing;
+                    }
+
+                }
+                else {
+
+                    if (intTickedItemCount == 0) {
+                        alert('Please select an item for redemption');
+                        return;
+                    }
+                    if (intComputedAvailPoints < 0) {
+                        alert('You do not have enough points for the selected item(s)');
+                        return;
+                    }
+
+                    var sConfirmMsg = ' Are you sure you want redeem these ' + intTickedItemCount + ' items? You will have ' + intComputedAvailPoints + ' points left after redemption.';
+                    if (confirm(sConfirmMsg)) {
+
+
+                        var myObject = new Object();
+
+
+                        $('#redemptionitems > div > img').each(function (index) {
+                            var src = $(this).attr('src');
+                            if (src == "/Images/checkbox.jpg") {
+                                var selectedid = '' + $(this).siblings('.pointsrequired').attr('data-crs-id')
+                                myObject.ID = selectedid;
+                                myObject.UserID = '@SessionWrapper.CurrentUser.ID';
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '@Url.Content("/api/RedeemPointsAPI/save")',
+                                    cache: false,
+                                    contentType: 'application/json; charset=utf-8',
+                                    data: JSON.stringify(myObject),
+                                    success: function (data) {
+                                        GetRedeemedCount();
+                                    }
+                                });
+                            }
+                        });
+
+                       
+
+
+
+                    } else {
+                        //do nothing;
+                    }
+                }
+                    return;
+            });
+
+            $('#redemptionitems .checkbox').click(function () {
+                var imagesrc = $(this).attr('src');
+                if (imagesrc == '/Images/checkbox.jpg') {
+                    $(this).attr('src', '/Images/uncheckbox.jpg');
+
+                    var requiredpoints = parseInt($(this).siblings('.pointsrequired').attr('data-value'));
+                    var availpoints = parseInt($('#msgpoints').attr('data-value'));
+                    intComputedAvailPoints = availpoints + requiredpoints;
+
+                    intTickedItemCount = intTickedItemCount - 1;
+
+                    $('#msgpoints').attr('data-value', intComputedAvailPoints);
+                    $('#msgpoints > div:first-child').html('You have ' + intComputedAvailPoints + ' points!');
+                }
+                else {
+                    $(this).attr('src', '/Images/checkbox.jpg');
+
+                    var requiredpoints = $(this).siblings('.pointsrequired').attr('data-value');
+                    var availpoints = $('#msgpoints').attr('data-value');
+                    intComputedAvailPoints = availpoints - requiredpoints;
+
+                    intTickedItemCount = intTickedItemCount + 1;
+
+                    $('#msgpoints').attr('data-value', intComputedAvailPoints);
+                    $('#msgpoints > div:first-child').html('You have ' + intComputedAvailPoints + ' points!');
+                    
+                }
+            });
+        
+        });
+
+        
+    </script>
+}
+
+@**
+<div id="overlay">
+<img src="/images/animatedwait.gif" />
+</div>
+**@
+ <div id="msgpoints" data-value="@SessionWrapper.CurrentUser.RedemptionPoints">
+    <div>You have @SessionWrapper.CurrentUser.RedemptionPoints points!</div>
+    <div id="btnRedeemPoints">
+        <input  type='button' value='Redeem Points' class="btn btn-primary"/>
+    </div>
+</div>
+<div id="redemptionitems">
+    @foreach (RedemptionItems tmp in ViewBag.RedeemPointsList)
+    {
+     <div >
+        
+        <img class="checkbox" src="/Images/uncheckbox.jpg"/>
+        <div class="imagediv"> 
+            <img src="@tmp.ImagePath" />
+        </div>
+        <div class="itemname">@tmp.Name</div>
+        <div class="pointsrequired" data-crs-id="@tmp.ID" data-value="@tmp.PointsRequired">Required Points: @tmp.PointsRequired</div>
+    </div>
+    }
+    
+
+</div>
+
+
+

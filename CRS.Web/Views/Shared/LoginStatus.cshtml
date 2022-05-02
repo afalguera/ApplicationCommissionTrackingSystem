@@ -1,0 +1,19 @@
+﻿
+    @{
+         
+        var txtToDisplay = "";
+        if (Request.IsAuthenticated)
+        {
+            txtToDisplay = "Welcome <strong> " + Page.User.Identity.Name + "</strong>!<br>" +
+                           "[ " + Html.ActionLink("Logout", "Logout", "Account") + " ]";
+
+        }
+        else
+        {
+            txtToDisplay = "[ " + Html.ActionLink("LogIn", "Login", "Account") + " ]";
+        }
+    }
+    
+
+@txtToDisplay
+

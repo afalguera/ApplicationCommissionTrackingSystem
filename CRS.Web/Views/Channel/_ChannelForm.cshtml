@@ -1,0 +1,115 @@
+﻿<style type="text/css">
+   
+	.validationMessage { 
+		color: #FF0000; 
+		font-size:x-small;
+		display: block;
+		white-space: nowrap;
+		float:none;
+	}
+	.input-validation-error { color: #FFA500; }
+	.input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+	<fieldset>
+		<div class="columnBox2">
+			<div>
+				<label>Channel Code</label>
+				<input type="text" data-bind="value: channelCode, enable: enableChannel" placeholder="Channel Code" />
+			</div>
+			<div>
+				<label>Channel Name</label>
+				<input type="text" data-bind="value: channelName" placeholder="Channel Name" />
+			</div>
+			<div>
+				<label>Payee Name</label>
+				<input type="text" data-bind="value: payeeName" placeholder="Payee Name" />
+			</div>
+			<div>
+				<label>Payee Tin</label>
+				<input type="text" data-bind="value: payeeTin" placeholder="Payee Tin" />
+			</div>
+			<div>
+				<label>Account Name</label>
+				<input type="text" data-bind="value: accountName" placeholder="Account Name" />
+			</div>
+			<div>
+				<label>Account Number</label>
+				<input type="text" data-bind="value: accountNumber" placeholder="Account Number" />
+			</div>
+			<div>
+				<label>Bank Branch</label>
+				<input type="text" data-bind="value: bankBranch" placeholder="Bank Branch" />
+			</div>
+			<div>
+				<label>Description</label>
+				<textarea name="txteaprDesc" style="display:block" id="txteaprDesc" cols="10" rows="5" data-bind="value: eaprDescription"
+					 maxlength="1000"></textarea>
+			</div>
+			<div style="clear:both"></div>
+			<div style="clear:both"></div>
+			<br />
+			<div>
+				<label>Is YGC</label>
+				<input type="checkbox" data-bind="checked: isYGC" />
+			</div>
+			<div>
+				<label>Is Gross</label>
+				<input type="checkbox" data-bind="checked: isGross" />
+			</div>
+			<div>
+				<label>Is Vatable</label>
+				<input type="checkbox" data-bind="checked: isVat" />
+			</div>
+			<div>
+				<label>Is EAPR</label>
+				<input type="checkbox" data-bind="checked: isEapr" />
+			</div>
+			<div>
+				<label>Is RCBC</label>
+				<input type="checkbox" data-bind="checked: isRcbc" />
+			</div>
+			<div>
+				<label>Is MyOrange</label>
+				<input type="checkbox" data-bind="checked: isMyOrange" />
+			</div>
+	  @*  </div>
+
+		<div class="columnBox">*@
+			<div>
+				<label>Requestor</label>
+				<div class="shortCombo">
+					<select data-bind="options: requestedByList, optionsText: 'Name', optionsValue: 'Id',
+							optionsCaption: 'Select Item',
+							value: requestorId"></select>
+				</div>
+			</div>
+			<div>
+				<label>Checker</label>
+				<div class="shortCombo">
+					<select data-bind="options: checkedByList, optionsText: 'Name', optionsValue: 'Id',
+							optionsCaption: 'Select Item',
+							value: checkerId"></select>
+				</div>
+			</div>
+			<div>
+				<label>Noter</label>
+				<div class="shortCombo">
+					<select data-bind="options: notedByList, optionsText: 'Name', optionsValue: 'Id',
+							optionsCaption: 'Select Item',
+							value: noterId"></select>
+				</div>
+			</div>
+			<div>
+				<label>Sales Manager</label>
+				<div class="shortCombo">
+					<select data-bind="options: approverList, optionsText: 'Name', optionsValue: 'Id',
+							optionsCaption: 'Select Item',
+							value: salesManagerId"></select>
+				</div>
+			</div>
+		   
+		</div>
+	</fieldset>
+</form>

@@ -1,0 +1,49 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+<form>
+    @*<fieldset>*@
+        <div class="columnBox2">
+            <div>
+                <label>Type</label>
+                <div class="shortCombo">
+                    <select id="ddType" data-bind="options: typeList, optionsText: 'Description', optionsValue: 'ManagerTypeId',
+                        optionsCaption: 'Select Item',
+                        value: managerTypeId"></select>
+                </div>
+            </div>
+          @*  <div>
+                <label>Outlet</label>
+                <div class="shortCombo">
+                    <select data-bind="options: outletList, optionsText: 'Name', optionsValue: 'Id',
+                        optionsCaption: 'Select Item',
+                        value: outletId"></select>
+                </div>
+            </div>*@
+            <div>
+                <label>Employee</label>
+                <a style="display:inline;font-size:x-small" href="#employeeSelectorModal" data-toggle="modal" data-bind="text: employeeSelectedDisplay, value: employeeSelected" title="Choose"></a>
+            </div>  
+            <div>
+                @Html.Partial("_CascadingLocator", new CRS.Models.CascadingLocator { UseBranchId = true })
+            </div>           
+            @*<div data-bind="if: showType" style="clear:both;margin-top:120px">
+                <label>Outlet</label>
+                <div class="shortCombo">
+                    <select id="ddOutlet" data-bind="options: outletList, optionsText: 'Name', optionsValue: 'Id',
+                    optionsCaption: 'Select Item',
+                    value: outletId"></select>
+                </div>
+            </div>*@
+        </div>
+    @*</fieldset>*@
+</form>

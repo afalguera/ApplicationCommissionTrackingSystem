@@ -1,0 +1,39 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Payment Code</label>
+                <input type="text" data-bind="value: paymentCode" placeholder="Payment Code" />
+            </div>
+            <div>
+                <label>Payment Name</label>
+                <input type="text" data-bind="value: paymentName" placeholder="Payment Name" />
+            </div>           
+            <div>
+                <label>TIN</label>
+                <input type="text" data-bind="value: tin" placeholder="TIN" />
+            </div>           
+            <div>
+                <label>Is Vatable</label>
+                <input type="checkbox" data-bind="checked: isVatable" />
+            </div>               
+            <div>
+                <label>Is Gross</label>
+                <input type="checkbox" data-bind="checked: isGross" />
+            </div>         
+        </div>
+    </fieldset>
+</form>

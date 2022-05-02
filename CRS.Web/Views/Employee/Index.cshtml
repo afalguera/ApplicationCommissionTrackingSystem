@@ -1,0 +1,114 @@
+﻿@{
+	ViewBag.Title = "Employee Management";
+}
+
+@section styles{
+	<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    <link href= "@Url.Content("~/Content/ambience/jquery.ambiance.css")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/ambience/demo.css")" rel="stylesheet" />
+	@Styles.Render("~/Content/Bootstrap/bootstrap.min.css",
+		"~/Content/Bootstrap/bootstrap-responsive.min.css",
+		"~/Content/Bootstrap/bootstrap-image-gallery.min.css")
+}
+
+@section jquerylibrary{
+	@Scripts.Render("~/Scripts/jquery-2.0.2.min.js")
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Content/ambience/jquery.ambiance.js")"  type="text/javascript"></script>
+	@Scripts.Render("~/Scripts/knockout-2.2.1.js",
+		"~/Scripts/jquery.blockUI.min.js",
+		"~/bundles/koBindings",
+        "~/bundles/ajaxwrapper",
+		"~/Scripts/Application/_CascadingLocator.js",
+		"~/Scripts/Application/Employee.js",
+		"~/Scripts/knockout.validation.js")
+    
+
+	<script id="employeeTableTemplate" type="text/html">
+		<td data-bind="text: BranchName"></td>
+		<td data-bind="text: EmployeeNumber"></td>
+		<td data-bind="text: LastName"></td>
+		<td data-bind="text: FirstName"></td>
+		<td data-bind="text: MiddleName"></td>
+		<td class="tdCenter">
+			<div>
+				<input type="checkbox" data-bind="enable: false, checked: IsActive" />
+			</div>
+		</td>
+		<td align="center" style="vertical-align:middle; text-align:center">
+			<center>
+				@if(ViewBag.PageAccess.CanEdit)
+				{
+					@*<a href="#employeeModal" role="link" class="btn btn-link" data-bind="click: $root.edit" data-toggle="modal">Edit</a>*@
+					<a href="#employeeModal" role="link" class="edit_button" data-bind="click: $root.edit" data-toggle="modal">Edit</a>
+				}
+				@if (ViewBag.PageAccess.CanDelete)
+				{
+					@*<a href="#confirmDeleteModal" role="link" class="btn btn-link" data-bind="click: $root.setId" data-toggle="modal">Delete</a>*@
+					<a href="#confirmDeleteModal" role="link" class="delete_button" data-bind="click: $root.setId" data-toggle="modal">Delete</a>
+				}
+			</center>
+		</td>
+	</script>
+}
+
+@Html.Partial("_Modal", new CRS.Models.ModalViewModel("employeeModal")
+{
+	Attributes = new { style = "width: auto" },
+	TitleAttributes = new { data_bind = "text: title" },
+	Body = @Html.Partial("_EmployeeForm"),
+	DefaultButtonText = "Save",
+	DefaultButtonAttributes = new { data_bind = "click: save" }
+})
+
+@if (ViewBag.PageAccess.CanDelete)
+{
+	@Html.Partial("_Modal", new CRS.Models.ModalViewModel("confirmDeleteModal")
+{
+	Attributes = new { style = "width: auto, height: auto" },
+	Title = "Delete Employee",
+	Body = MvcHtmlString.Create("<p>Continue deletion?</p>"),
+	DefaultButtonText = "Yes",
+	DefaultButtonAttributes = new { data_bind = "click: deleteEmployee" },
+	CancelButtonText = "No"
+})
+}
+
+<div class="demo">
+	<table cellpadding="0" cellspacing="0" border="0" class="display"
+		data-bind="dataTable: { dataSource: items,
+					rowTemplate: 'employeeTableTemplate',
+					columns: itemColumns, 	
+					options: {
+						bJQueryUI: true,
+						bPaginate: true,
+						bLengthChange: true,
+						bFilter: true,
+						bSort: true,
+						bInfo: true,
+						bAutoWidth: true,
+						bProcessing: true,
+						sPaginationType: 'full_numbers',
+						bDeferRender: true
+					}}">
+		<thead>
+			<tr>
+				<th>Branch</th>
+				<th>Employee Number</th>
+				<th>Last Name</th>
+				<th>First Name</th>
+				<th>Middle Name</th>
+				<th>Is Active</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<br />
+	@if (ViewBag.PageAccess.CanAdd)
+	{
+		<a href="#employeeModal" role="button" class="btn btn-primary" data-bind="click: add" data-toggle="modal">Add</a>
+	}
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    System.Text.StringBuilder tableBuilder = new System.Text.StringBuilder();
+    tableBuilder.Append("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"display\"");
+    tableBuilder.Append("data-bind=\"dataTable: { dataSource: employeeSelectorList, rowTemplate: 'employeeSelectorTableTemplate', columns: employeeSelectorColumns,");
+    tableBuilder.Append("options: { bJQueryUI: true, bPaginate: true, bLengthChange: true, bFilter: true, bSort: true, bInfo: true, bAutoWidth: true, bProcessing: true, sPaginationType: 'full_numbers' }}\"");
+    tableBuilder.Append("<thead><tr><th></th><th>Branch</th><th>Employee Number</th><th>Last Name</th><th>First Name</th><th>Middle Name</th><th>Is Active</th></tr></thead><tbody></tbody></table>");
+}
+
+<script id="employeeSelectorTableTemplate" type="text/html">
+    <td>
+        @*<button class="btn-link" data-dismiss="modal" data-bind="click: $root.selectEmployee">Select</button>*@
+        <button class="btn btn-mini" data-dismiss="modal" data-bind="click: $root.selectEmployee">Select</button>
+    </td>
+    <td data-bind="text: BranchName"></td>
+    <td data-bind="text: EmployeeNumber"></td>
+    <td data-bind="text: LastName"></td>
+    <td data-bind="text: FirstName"></td>
+    <td data-bind="text: MiddleName"></td>
+  @*  <td>
+        <input type="checkbox" data-bind="enable: false, checked: IsActive" />
+    </td>*@
+</script>
+
+@Html.Partial("_Modal", new CRS.Models.ModalViewModel("employeeSelectorModal")
+{
+    Attributes = new { style = "z-index: 9999" },
+    Title = "Choose Employee",
+    Body = MvcHtmlString.Create(tableBuilder.ToString()),
+    DefaultButtonAttributes = new { data_bind = "click: cancelEmployeeSelection" }
+    //DefaultButtonText = "No Selection"
+})

@@ -1,0 +1,46 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+        margin-top: 30px;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+        <div class="columnBox">
+           <div>
+               <div>
+                    <label>Channel:</label>
+                    <div class="shortCombo">
+					    <select id="ddChannel" data-bind="options: channelList,
+                                                            optionsText: 'Name',
+                                                            optionsValue: 'Code',
+                                                            value: selectedChannel,
+                                                            optionsCaption: '-- All --'" ></select>
+			        </div>
+                </div>
+                <div>
+                    <label>Card Brand:</label>
+			        <div class="shortCombo">
+						    <select id="ddCardBrand" data-bind="options: cardBrandList, 
+                                optionsText: 'CardBrandName',
+                                optionsValue: 'CardBrandCode',
+                                value: selectedCardBrand,
+                                optionsCaption: '-- All --'" ></select>
+			        </div>
+                </div>
+               <div>
+                    <div>
+                        <label>Comm Rate:</label>
+                        <input id="txtCommissionRate" type="text" maxlength="10" data-bind="value: commissionRate" placeholder="Commission Rate" />
+                    </div>
+               </div>
+            </div>
+        </div>       
+ </form>

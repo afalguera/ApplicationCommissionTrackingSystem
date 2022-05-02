@@ -1,0 +1,107 @@
+﻿@model CRS.BusinessEntities.RolePageAccess
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section styles {
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+}
+
+@section scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+        
+    <script type="text/javascript">
+
+        function OpenConfirmationDialog(name) {
+            $('#ConfirmContent').html('Are you sure you wish to delete ' + name + '?');
+            $('#Confirmation-Dialog').dialog('open');
+        }   
+     
+        $("#Confirmation-Dialog").dialog({
+            resizable: false,
+            height: 180,
+            width: 300,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "OK": function () {
+                    location.href = '@Url.RouteUrl("Default", new { Controller = "RolePageAccess", Action = "Delete", Id = Model.ID })';
+                $(this).dialog("close");
+            },
+            Cancel: function () {
+                $(this).dialog("close");
+            }
+        }
+        });
+
+        $(".colorButton").removeAttr('style').css("width", "100px");
+        </script>
+}
+
+<div id="Confirmation-Dialog">
+    <div id="ConfirmContent" ">Are you sure you wish to delete?</div>      
+</div>
+
+@using (Html.BeginForm())
+{
+    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit</legend>
+        <ol class="tableFixer">
+            <li>
+                @Html.HiddenFor(m => m.ID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PageTitle)
+                @Html.TextBoxFor(m => m.PageTitle, new { @readonly = true })
+            </li>
+            <li>
+               <div>@Html.LabelFor(m => m.CanAdd)</div>
+               <div>@Html.CheckBoxFor(m => m.CanAdd)</div>
+                
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanEdit)</div>
+                <div>@Html.CheckBoxFor(m => m.CanEdit)</div>
+                
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanDelete)</div>
+                <div>@Html.CheckBoxFor(m => m.CanDelete)</div>
+               
+            </li>
+            <li>
+                <div>@Html.LabelFor(m => m.CanView)</div>
+                <div>@Html.CheckBoxFor(m => m.CanView)</div>
+             </li>
+            <li>  
+                <div>@Html.LabelFor(m => m.CanPrint)</div>
+                <div>@Html.CheckBoxFor(m => m.CanPrint)</div>
+            </li> 
+        </ol>
+        @if ( (ViewBag.PageAccess as CRS.BusinessEntities.UserPageAccess).CanEdit)
+        {
+              <input type="submit" value="Save" class="colorButton"/>
+        }
+        
+        @if ( (ViewBag.PageAccess as CRS.BusinessEntities.UserPageAccess).CanDelete)
+        {
+          <input type="button" class="colorButton" title="Delete page access" value="Delete" onclick="OpenConfirmationDialog('@Model.PageTitle    ')" />
+        }
+         <input type="button" value="Back" onclick="history.back();" class="colorButton"/>
+        
+     @*   <input type="submit" value="Save" />
+        <input type="button" title="Delete page access" value="Delete page access" onclick="OpenConfirmationDialog('@Model.PageTitle')" />*@
+
+        
+    </fieldset>
+    
+}
+
+

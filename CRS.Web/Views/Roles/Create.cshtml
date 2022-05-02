@@ -1,0 +1,47 @@
+﻿@model CRS.BusinessEntities.Role
+@{
+    ViewBag.Title = "Create";
+}
+
+@section jquerylibrary{
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.2.min.js"></script>
+}
+
+@section scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(".colorButton").removeAttr('style').css("width", "100px");
+    </script>
+}
+@using (Html.BeginForm())
+{
+     @Html.ValidationSummary(true) 
+    <div>
+        <fieldset>
+             <ol>
+                <li>
+                    @Html.HiddenFor(m => m.ID)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name)
+                    <div>
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </li>
+            </ol>
+            <div class="clear"></div>
+            @*<input type="submit" value="Save" class="unfloated"/>*@
+            <br />
+               <input type="submit" value="Save" class="colorButton"/>
+               <input type="button" value="Back" onclick="history.back();" class="colorButton"/>
+        </fieldset>
+    </div>
+}
+
+
+
+
+
+
+

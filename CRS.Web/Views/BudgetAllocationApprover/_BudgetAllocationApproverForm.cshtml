@@ -1,0 +1,43 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Approver Code</label>
+                <input type="text" data-bind="value: budgetAllocationApproverCode" placeholder="Approver Code" />
+            </div>
+            <div>
+                <label>Approver Title</label>
+                <input type="text" data-bind="value: approverTitle" placeholder="Approver Title" />
+            </div>  
+            <div>
+                <label>Approver Name</label>
+                <input type="text" data-bind="value: approverName" placeholder="Approver Name" />
+            </div>  
+            <div>
+                <label>Approver Amount Lower</label>
+                <input type="text" data-bind="value: approverAmountLower" placeholder="Approver Amount Lower" id="txtApproverAmountLower" />
+            </div>  
+            <div>
+                <label>Approver Amount Upper</label>
+                <input type="text" data-bind="value: approverAmountUpper" placeholder="Approver Amount Upper" id="txtApproverAmountUpper" />
+            </div>  
+            <div>
+                <label>Remarks</label>
+                <input type="text" data-bind="value: remarks" placeholder="Remarks" />
+            </div>           
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,35 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+	ViewBag.Title = "Page Not Found";
+}
+@section jquerylibrary{
+    <script src="~/Scripts/jquery-2.0.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnHome").click(function (event) {
+            window.location.href = "/";
+        });
+    });
+    </script>
+}
+	@if (@Model != null)
+	{
+		
+		<h2 class="error">@Model.Exception</h2>
+	}
+	else
+	{
+        <h2>
+			Sorry, the page you were looking for doesn’t exist. (404)
+		</h2>
+        <br /><br />
+        <div style="width: 40%; margin: 0 auto;display:block;"> 
+            <img src="../../Content/images/exclamation-mark-red-md.png" alt="Page Not Found!" />
+        </div>
+        <br />
+        <div style="width: 30%; margin: 0 auto;">  
+                    <button id="btnHome" type="button">Home</button>   
+                    <button type="button" onclick="history.back();">Back</button>                                  
+        </div>
+	}
+

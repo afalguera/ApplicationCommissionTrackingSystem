@@ -1,0 +1,27 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Card Brand Code</label>
+                <input type="text" data-bind="value: cardBrandCode" placeholder="Card Brand Code" />
+            </div>
+            <div>
+                <label>Card Brand Name</label>
+                <input type="text" data-bind="value: cardBrandName" placeholder="Card Brand Name" />
+            </div>           
+        </div>
+    </fieldset>
+</form>

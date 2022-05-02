@@ -1,0 +1,31 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+
+</style>
+
+<form>
+    <fieldset>
+        <div class="columnBox">
+            <div>
+                <label>Outlet Code</label>
+                <input type="text" data-bind="value: outletCode" placeholder="Outlet Code" />
+            </div>
+            <div>
+                <label>Outlet Name</label>
+                <input type="text" data-bind="value: outletName" placeholder="Outlet Name" />
+            </div>
+            <div style="margin-top:-20px">
+                 @Html.Partial("_CascadingLocator", new CRS.Models.CascadingLocator { UseBranchId = true })
+            </div>
+        </div>
+    </fieldset>
+</form>

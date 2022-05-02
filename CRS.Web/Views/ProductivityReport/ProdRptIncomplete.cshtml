@@ -1,0 +1,371 @@
+﻿@model CRS.Models.ProdRptIncompleteModel
+@using CRS.BusinessEntities
+@{
+    ViewBag.Title = "Incomplete Report(s)";
+
+    string firstdayCurrentMonth = (DateTime.Now.Month.ToString() + "/01/"  +  DateTime.Now.Year.ToString());
+    DateTime datefirstdayCurrentMonth = Convert.ToDateTime(firstdayCurrentMonth);
+    string  lastdayCurrentMonth = datefirstdayCurrentMonth.AddMonths(1).AddDays(-1).ToShortDateString();
+
+    bool showreport = ! string.IsNullOrEmpty(CRS.BusinessEntities.Reports.ReportData.ReportPath);
+    string showreportfunction = "ShowReport()";
+    if (showreport && ViewBag.IsButtonClicked) {
+       showreportfunction = "ShowReport()";
+    }
+    else {
+       showreportfunction  ="";
+    }
+  }
+
+@section styles{
+    
+     @Styles.Render("~/Content/themes/base/css")
+     
+    
+     <style>
+         .ui-datepicker {
+	          z-index : 9999 !important;
+         }
+         .contentHolder input {
+           float: none;
+            margin: 5px 0 0 0;
+          }
+         h1, h2, h3, h4, h5, h6 {
+            padding-bottom: 20px;
+         }
+         label {
+            width: 100px;
+         }
+         input, textarea, select {
+            width: 160px;
+         }
+
+         .ui-widget select {
+            font-size : 12px !important;
+         }
+
+         .columnBox3 {
+                width: 314px;
+         }
+
+         .columnBox2 div label {
+            width: 67px;
+         }
+
+        
+
+         .headercolumn {
+            width: 100%;
+            float: none;
+            DISPLAY: inline; 
+            margin-bottom: 100px;
+         }
+
+         
+
+         /* tabs */
+          .ui-tabs-vertical { width: 50em; }
+          .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 8em; }
+          .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+          .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+          .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+          .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 39em;}
+          .ui-tabs {
+           margin-bottom: 20px;
+           }
+          .ui-tabs-anchor {font-size: 12px;}
+
+        /*tabs*/
+     </style>
+}
+
+@section jquerylibrary{
+     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        function ShowReport() {
+            var url = "../Reports/ReportViewer.aspx";
+            window.open(url);
+        }
+        
+        $(document).tooltip({
+            position: {
+                my: "center bottom-20",
+                at: "center top",
+                using: function (position, feedback) {
+                    $(this).css(position);
+                    $("<div>")
+                    .addClass("arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(feedback.horizontal)
+                    .appendTo(this);
+                }
+            }
+        });
+
+        $(document).ready(function () {
+
+            setTimeout('@showreportfunction', 1000);
+
+            $(".date").datepicker();
+            $('#listtable').dataTable();
+            $("#yeardropdown option:selected").val((new Date).getFullYear());
+
+            /*tabs*/
+            $("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+            $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+            $("#tabs").bind("click", function (event, ui) {
+                $('#lastTab').attr('value', $('#tabs ul li[aria-selected=true] a').html());
+            })
+            /*tabs*/
+
+            $('#datefrom').attr('value', '@DateTime.Now.Month/01/@DateTime.Now.Year');
+            $('#dateto').attr('value', '@DateTime.Now.Date.ToShortDateString()');
+          
+
+             $('#datefiltermisc').change(function () {
+                 if ($('#datefiltermisc').val() == 'OTHERS') {
+                     $('.YearFilter').css('display', 'none');
+                     $('.DateFilter').css('display', '');
+                     $('.WeekFilter').css('display', 'none');
+                     $('.MonthFilter').css('display', 'none');
+                     $('.ShowChartBox').css('display', '');
+
+                 }
+                 else if ($('#datefiltermisc').val() == 'QUARTERLY') {
+                     $('.YearFilter').css('display', '');
+                     $('.DateFilter').css('display', 'none');
+                     $('.MonthFilter').css('display', 'none');
+                     $('.ShowChartBox').css('display', '');
+                 }
+                 else if ($('#datefiltermisc').val() == 'MONTHLY') {
+                     $('.YearFilter').css('display', '');
+                     $('.DateFilter').css('display', 'none');
+                     $('.WeekFilter').css('display', 'none');
+                     $('.MonthFilter').css('display', 'none');
+                     $('.ShowChartBox').css('display', '');
+                 }
+                 else if ($('#datefiltermisc').val() == 'WEEKLY') {
+                     $('.YearFilter').css('display', '');
+                     $('.DateFilter').css('display', 'none');
+                     $('.WeekFilter').css('display', '');
+                     $('.MonthFilter').css('display', '');
+                     $('.ShowChartBox').css('display', '');
+                 }
+                 else if ($('#datefiltermisc').val() == 'DAILY') {
+                     $('.YearFilter').css('display', '');
+                     $('.DateFilter').css('display', 'none');
+                     $('.WeekFilter').css('display', 'none');
+                     $('.MonthFilter').css('display', '');
+                     $('.ShowChartBox').css('display', '');
+                 }
+                 else /* detail */ {
+                     $('.YearFilter').css('display', 'none');
+                     $('.DateFilter').css('display', '');
+                     $('.WeekFilter').css('display', 'none');
+                     $('.MonthFilter').css('display', 'none');
+                     $('.ShowChartBox').css('display', 'none');
+                 }
+             });
+
+
+
+             $('#monthdropdown,#yeardropdown').change(function () {
+                 $('#weekdropdown > option').remove();
+
+                 var selectedMonth = $('#monthdropdown').val();
+                 var selectedYear = $('#yeardropdown').val();
+
+                 var week1_start = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 var dayofweek = week1_start.getDay();
+
+                 var succedingSunday = (8 - dayofweek);
+                 if (succedingSunday < 7) {
+                     succedingSunday = succedingSunday + 7;
+                 }
+                 var week1_end = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, succedingSunday);
+
+                 var week2_start = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 week2_start.setDate(week1_end.getDate() + 1);
+
+                 var week2_end = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 week2_end.setDate(week2_start.getDate() + 6);
+
+                 var week3_start = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 week3_start.setDate(week2_end.getDate() + 1);
+
+                 var week3_end = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 week3_end.setDate(week3_start.getDate() + 6);
+
+
+                 var week4_start = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 week4_start.setDate(week3_end.getDate() + 1);
+
+
+                 var week4_end = new Date(parseInt(selectedYear), parseInt(selectedMonth), 1)  //get next month
+                 week4_end.setDate(week4_end.getDate() - 1); //and deduct 1 day
+
+                 var week5_start = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 var week5_end = new Date(parseInt(selectedYear), parseInt(selectedMonth) - 1, 1);
+                 var isfiveweeks = false;
+                 if ((week4_end.getDate() - week4_start.getDate()) > 6) {
+                     isfiveweeks = true;
+
+                     week5_end.setDate(week4_end.getDate());
+
+                     week4_end.setDate(week4_start.getDate() + 6);
+
+                     week5_start.setDate(week4_end.getDate() + 1);
+
+
+
+                 }
+
+                 var strweek1_start = week1_start.getMonth() + 1 + '/' + week1_start.getDate() + '/' + week1_start.getFullYear();
+                 var strweek1_end = week1_end.getMonth() + 1 + '/' + week1_end.getDate() + '/' + week1_end.getFullYear();
+                 var strweek2_start = week2_start.getMonth() + 1 + '/' + week2_start.getDate() + '/' + week2_start.getFullYear();
+                 var strweek2_end = week2_end.getMonth() + 1 + '/' + week2_end.getDate() + '/' + week2_end.getFullYear();
+                 var strweek3_start = week3_start.getMonth() + 1 + '/' + week3_start.getDate() + '/' + week3_start.getFullYear();
+                 var strweek3_end = week3_end.getMonth() + 1 + '/' + week3_end.getDate() + '/' + week3_end.getFullYear();
+                 var strweek4_start = week4_start.getMonth() + 1 + '/' + week4_start.getDate() + '/' + week4_start.getFullYear();
+                 var strweek4_end = week4_end.getMonth() + 1 + '/' + week4_end.getDate() + '/' + week4_end.getFullYear();
+                 var strweek5_start = '';
+                 var strweek5_end = '';
+
+                 if (isfiveweeks) {
+                     strweek5_start = week5_start.getMonth() + 1 + '/' + week5_start.getDate() + '/' + week5_start.getFullYear();
+                     strweek5_end = week5_end.getMonth() + 1 + '/' + week5_end.getDate() + '/' + week5_end.getFullYear();;
+
+                 }
+
+
+                 $('#weekdropdown').append($('<option></option>').val('Week1' + strweek1_start + '-' + strweek1_end).html('Week 1 (' + strweek1_start + ' to ' + strweek1_end + ')'));
+                 $('#weekdropdown').append($('<option></option>').val('Week2' + strweek2_start + '-' + strweek2_end).html('Week 2 (' + strweek2_start + ' to ' + strweek2_end + ')'));
+                 $('#weekdropdown').append($('<option></option>').val('Week3' + strweek3_start + '-' + strweek3_end).html('Week 3 (' + strweek3_start + ' to ' + strweek3_end + ')'));
+                 $('#weekdropdown').append($('<option></option>').val('Week4' + strweek4_start + '-' + strweek4_end).html('Week 4 (' + strweek4_start + ' to ' + strweek4_end + ')'));
+
+                 if (isfiveweeks) {
+                     $('#weekdropdown').append($('<option></option>').val('Week5' + strweek5_start + '-' + strweek5_end).html('Week 5 (' + strweek5_start + ' to ' + strweek5_end + ')'));
+                 }
+                 var allweeksval = 'All**' + strweek1_start + '-' + strweek1_end + '|' +
+                                      strweek2_start + '-' + strweek2_end + '|' +
+                                      strweek3_start + '-' + strweek3_end + '|' +
+                                      strweek4_start + '-' + strweek4_end;
+
+                 if (isfiveweeks) {
+                     allweeksval = allweeksval + '|' +
+                                          strweek5_start + '-' + strweek5_end;
+
+                 }
+                 $('#weekdropdown').append($('<option></option>').val(allweeksval).html('All weeks'));
+
+
+
+             });
+
+             $('#datefiltermisc').trigger('change');
+
+
+
+
+             $('#datefiltermisc').trigger('change');
+
+             
+
+            });
+
+       
+
+         </script>
+    
+}
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+            
+            @Html.ValidationSummary(true)
+          
+            @*<br />
+             <br />
+           
+            <fieldset>*@
+           
+                 
+                 
+                    
+                  <div class="columnBox2 columnBox3">
+                     
+                   <!-- 
+                      <div class="ShowChartBox"> 
+                        @Html.LabelFor(m=>m.ShowChart)
+                        @Html.CheckBoxFor(m=> m.ShowChart)
+
+                    </div>
+                    -->
+                    <div>
+                        @*@Html.LabelFor(m=>m.ReportName)*@
+                        @Html.Label("Report")
+                        <div class="comboBox">
+                                   @Html.DropDownListFor(m => m.ReportName, (IEnumerable<SelectListItem>)ViewBag.ReportNames, new { onchange = "this.form.submit();" })
+                            
+                        </div>
+                    </div>
+                    <div> 
+                       @Html.LabelFor(m => m.ReportType)
+                       <div class="comboBox">@Html.DropDownListFor(m => m.ReportType, (IEnumerable<SelectListItem>)ViewBag.ReportID, new { @id = "datefiltermisc" })</div>
+                       @Html.ValidationMessageFor(m => m.ReportType)
+                    </div>
+                    <div class="DateFilter">
+                          @Html.LabelFor(m => m.DateFrom)
+                         @Html.TextBoxFor(m => m.DateFrom, new { @class = "date", @id = "datefrom" })
+                        @Html.ValidationMessageFor(m => m.DateFrom)
+                    </div>
+                    <div class="MonthFilter">
+                         @Html.LabelFor(m => m.Month)
+                        <div class="comboBox">
+                            @Html.DropDownListFor(m => m.Month, (IEnumerable<SelectListItem>)ViewBag.Month,new { @id = "monthdropdown" })
+                        </div>
+                    </div> 
+                </div>
+                 
+                <div class="columnBox2 columnBox3">  
+                    <div></div>     
+                    <div class="YearFilter">
+                         @Html.LabelFor(m => m.Year)
+                        <div class="comboBox">
+                            @Html.DropDownListFor(m => m.Year, (IEnumerable<SelectListItem>)ViewBag.Year,new { @id = "yeardropdown" })
+
+                        </div>
+                    </div>
+                    <div class="WeekFilter">
+                         @Html.LabelFor(m => m.Week)
+                        <div class="comboBox">
+                            @Html.DropDownListFor(m => m.Week, (IEnumerable<SelectListItem>)ViewBag.Week,new { @id = "weekdropdown" })
+                        </div>
+                    </div>
+                    <div></div>
+                    <div class="DateFilter"> 
+                      @Html.LabelFor(m => m.DateTo)
+                      @Html.TextBoxFor(m => m.DateTo, new { @class = "date",@id = "dateto" })
+                      @Html.ValidationMessageFor(m => m.DateTo)
+                    </div>
+
+                   
+               </div>  
+         
+
+     @*</fieldset>*@
+            
+             
+    <div style="clear:both"></div>
+    <input type="submit" title="Generate Report" value="Generate Report" class="inputBtn"  />
+                
+}
+
+
+
+ 

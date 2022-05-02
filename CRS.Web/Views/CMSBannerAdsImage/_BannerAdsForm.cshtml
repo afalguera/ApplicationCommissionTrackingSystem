@@ -1,0 +1,64 @@
+﻿<style type="text/css">
+   
+    .validationMessage { 
+        color: #FF0000; 
+        font-size:x-small;
+        display: block;
+        white-space: nowrap;
+        float:none;
+    }
+    .input-validation-error { color: #FFA500; }
+    .input-validation-error-pink { color: #FFC0CB; }
+</style>
+<form>
+  @*  <fieldset>*@
+    <div class="columnBox2">
+            <div>
+                 <button id="btnImageSelector" class="buttonBlue">Select image</button>
+            </div>
+            @* Button trigger modal *@
+            <div>
+                <label>Path</label>
+                <input id="txtPath" type="text" data-bind="text: imagePath, enable:false" placeholder="Path" />
+            </div>
+            <div>
+                <label>Name</label>
+                <input type="text" data-bind="value: imageName" placeholder="Name" />
+            </div>
+            <div>
+                <label>Url</label>
+                <input id="txtUrl" type="text" data-bind="value: targetUrl" placeholder="Url" />
+            </div>
+            <div>
+				<label>Role</label>
+				<div class="shortCombo" style="display:block; color:blue;">
+					<select id="Role" name="Role" data-bind="options: roleList,
+                    optionsText: 'Name',
+                    optionsValue: 'ID',
+                    optionsCaption: 'Select Item',
+                    value: selectedRole"></select>
+				</div>
+			</div>
+            <div>
+                <label>Start Date</label>
+                <input id="dtStartDate" type="text" data-bind="value: startDate" placeholder="Start Date" />
+            </div> 
+            <div>
+                <label>End Date</label>
+                <input id="dtEndDate" type="text" data-bind="value: endDate" placeholder="End Date" />
+            </div> 
+            <div id="Dialog-Box">
+            <div id="gallery">
+			        <div id="feature"><img id="defimg"  src="/Media/@Path.GetFileName(@ViewBag.DefaultImage)" border="0"/></div>
+			        <div class="thumbs">
+			        @foreach (string tmp in ViewBag.ImageFiles)
+                    {
+                        <a href="#" rel="/Media/@Path.GetFileName(tmp)" class="galImg"><img src="/Media/@Path.GetFileName(tmp)" class="thumb"  title="testing" border="0"/></a>
+                    }
+                    </div>
+              </div> 
+            </div>            
+        </div>
+   @* </fieldset>*@
+</form>
+

@@ -1,0 +1,100 @@
+﻿@using CRS.BusinessEntities
+
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+            </hgroup>
+        </div>
+    </section>
+}
+
+@**
+@section MainBanner {
+    
+    @Html.Partial("_MainBanner")
+}
+**@
+
+@section scripts {
+    <script type="text/javascript">
+        $('#listtable').dataTable({
+            "sScrollY": 200,
+            "sPaginationType": "full_numbers",
+            "width":5000
+        });
+
+        
+        $("#Dialog-Box").dialog({
+                resizable: false,
+                height: 460,
+                width: 340,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    "Save": function () {
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        
+       function OpenDialog() {
+            var TINNo = 'Enter TIN here';
+            var contactno = 'Enter contact no here';
+            $('#Dialog-TINNo').val(TINNo);
+            $('#Dialog-ContactNo').val(contactno);
+            $('#Dialog-EmploymentCert').val('Upload COE here');
+
+            $('#Dialog-Box').dialog('open');
+        }
+     </script>
+}
+
+<div id="Dialog-Box">
+        <input type="text" id="Dialog-TINNo" />
+        <input type="text" id="Dialog-ContactNo" />
+        <input type="file" id="Dialog-EmploymentCert" />
+ </div>
+
+<div  class="float-left">
+@if (CRS.Helpers.SessionWrapper.UserType == CRS.Helpers.UserType.Cardholder)
+{
+    <button onclick="OpenDialog()">Submit additional requirements</button>
+}
+<table border="0" class="display" id="listtable">
+	<thead>
+		<tr>
+			<th>Application No.</th>
+			<th>Status</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+	   </tr>
+	</thead>
+	<tbody>
+		@foreach (CardApplication tmp in ViewBag.CardApplications)
+        {           
+            <tr class="gradeX"> 
+                <td class="Center">@tmp.Number</td>
+                <td class="Center">@tmp.StatusCode</td>
+                <td>@tmp.LastName</td>
+                <td>@tmp.FirstName</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+		<tr>
+			<th>Application No.</th>
+			<th>Status</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+		</tr>
+	</tfoot>
+</table>
+ </div>
+        
+        
+        

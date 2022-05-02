@@ -1,0 +1,159 @@
+﻿@model CRS.Models.ProdRptOutrightRejectModel
+@using CRS.BusinessEntities
+@{
+    ViewBag.Title = "Outright Reject Report";
+
+    string firstdayCurrentMonth = (DateTime.Now.Month.ToString() + "/01/"  +  DateTime.Now.Year.ToString());
+    DateTime datefirstdayCurrentMonth = Convert.ToDateTime(firstdayCurrentMonth);
+    string  lastdayCurrentMonth = datefirstdayCurrentMonth.AddMonths(1).AddDays(-1).ToShortDateString();
+
+    bool showreport = ! string.IsNullOrEmpty(CRS.BusinessEntities.Reports.ReportData.ReportPath);
+    string showreportfunction = "ShowReport()";
+    if (showreport && ViewBag.IsButtonClicked) {
+       showreportfunction = "ShowReport()";
+    }
+    else {
+       showreportfunction  ="";
+    }
+  }
+
+@section styles{
+    @Styles.Render("~/Content/themes/base/css")
+    <style>
+         .ui-datepicker {
+	          z-index : 9999 !important;
+         }
+         .contentHolder input {
+           float: none;
+            margin: 5px 0 0 0;
+          }
+         h1, h2, h3, h4, h5, h6 {
+            padding-bottom: 20px;
+         }
+         label {
+            width: 100px;
+         }
+         input, textarea, select {
+            width: 160px;
+         }
+
+         .ui-widget select {
+            font-size : 12px !important;
+         }
+
+         .columnBox3 {
+                width: 314px;
+         }
+
+         .columnBox2 div label {
+            width: 67px;
+         }
+
+        
+
+         .headercolumn {
+            width: 100%;
+            float: none;
+            DISPLAY: inline; 
+            margin-bottom: 100px;
+         }
+
+         
+
+     </style>
+}
+
+
+
+@section jquerylibrary{
+     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        function ShowReport() {
+            var url = "../Reports/ReportViewer.aspx";
+            window.open(url);
+        }
+        
+        $(document).tooltip({
+            position: {
+                my: "center bottom-20",
+                at: "center top",
+                using: function (position, feedback) {
+                    $(this).css(position);
+                    $("<div>")
+                    .addClass("arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(feedback.horizontal)
+                    .appendTo(this);
+                }
+            }
+        });
+
+        $(document).ready(function () {
+
+            setTimeout('@showreportfunction', 1000);
+
+            $(".date").datepicker();
+            
+
+            $('#datefrom').attr('value', '@DateTime.Now.Month/01/@DateTime.Now.Year');
+            $('#dateto').attr('value', '@DateTime.Now.Date.ToShortDateString()');
+          
+         });
+
+       
+
+         </script>
+    
+}
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+            
+            @Html.ValidationSummary(true)
+          
+             @* <br />
+             <br />
+           
+            <fieldset>*@
+           
+                 
+                 
+                    
+                <div class="columnBox2 columnBox3">
+                    <div>
+                        @*@Html.LabelFor(m=>m.ReportName)*@
+                        @Html.Label("Report")
+                        <div class="comboBox">
+                                   @Html.DropDownListFor(m => m.ReportName, (IEnumerable<SelectListItem>)ViewBag.ReportNames, new { onchange = "this.form.submit();" })
+                            
+                        </div>
+                    </div>
+
+                    <div class="DateFilter">
+                          @Html.LabelFor(m => m.DateFrom)
+                         @Html.TextBoxFor(m => m.DateFrom, new { @class = "date", @id = "datefrom" })
+                        @Html.ValidationMessageFor(m => m.DateFrom)
+                    </div>
+
+                   <div class="DateFilter"> 
+                      @Html.LabelFor(m => m.DateTo)
+                      @Html.TextBoxFor(m => m.DateTo, new { @class = "date",@id = "dateto" })
+                      @Html.ValidationMessageFor(m => m.DateTo)
+                   </div>
+                </div>
+                 
+              
+         
+
+     @*</fieldset>*@
+            
+             
+    <div style="clear:both"></div>
+    <input type="submit" title="Generate Report" value="Generate Report" class="inputBtn"  />
+                
+}

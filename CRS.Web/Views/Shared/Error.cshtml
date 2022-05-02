@@ -1,0 +1,54 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+@section jquerylibrary{
+    <script src="~/Scripts/jquery-2.0.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnHome").click(function (event) {
+            window.location.href = "/";
+        });
+    });
+    </script>
+}
+
+    <h2 class="error">
+        An error occurred while processing your request.
+    </h2>
+    @{
+        if (Request.IsLocal)
+        {
+            if (@Model != null && @Model.Exception != null)
+            {
+        <h3>
+            Exception was : @Model.Exception.Message
+        </h3>
+        <h4>
+            Stack Trace: @Model.Exception.StackTrace
+        </h4>
+            }
+            else
+            {
+        <h3>
+            Exception was null
+        </h3>
+            }
+        }
+        else
+        {
+        <h2>
+			Sorry, An error occured while processing your request.
+		</h2>
+        <br /><br />
+        }
+        <div style="width: 40%; margin: 0 auto;display:block;"> 
+            <img src="../../Content/images/x-mark-md.png" alt="Page Error!" />
+        </div>
+        <br />
+        <div style="width: 30%; margin: 0 auto;">  
+                    <button id="btnHome" type="button">Home</button>   
+                    <button type="button" onclick="history.back();">Back</button>                                  
+        </div>
+    }
+

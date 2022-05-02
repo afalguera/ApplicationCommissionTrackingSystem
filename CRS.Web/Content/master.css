@@ -1,0 +1,227 @@
+@font-face{
+ font-family: 'Myriad Pro Light'; 
+ src:url(Font/Myriad/MyriadPro-Light_0.eot) ;
+}
+
+@font-face{
+ font-family: ''Open Sans',sans-serif'; 
+ src:url(Font/Myriad/MyriadPro-Regular.eot);
+}
+html { overflow-x: hidden;}
+body { font-family:'Open Sans',sans-serif; overflow-x: hidden }
+
+.lineTop { background:url(../images/topLine.jpg) repeat-x; height: 30px; }
+
+#wrapper { width: 1024px; margin: 0 auto; padding: 0 38px; position: relative}
+#innerWrapper { width: 955px; margin: 0 auto; min-height: 785px }
+.clear { clear: both }
+
+/* topbody part */
+.topBody { margin-top: 50px; overflow: hidden }
+	.siteMsg { background: #05467c; color: #ffffff; font-family:'Open Sans',sans-serif; font-size: 20px; margin: 7px 0 51px; padding: 10px 25px;}
+    .topBody a { }
+	#logoHolder { background:url(../images/logo.png) no-repeat; width: 310px; height: 75px; float: left }
+	#login { float: right; text-align: right; font-size: 17px; font-family:'Open Sans',sans-serif; color: #161616; line-height: 1.3em}
+		#login a { color: red; }
+		
+/*banner part */
+.bannerHolder { background:url(../images/bannerHolder.png) no-repeat; width: 978px; height: 404px; position: relative; left: -12px }
+	.blueBackground { background:url(../images/bannerBg2.png) no-repeat; width: 1580px; height: 635px; position: absolute; left: -230px; top: 150px }
+	.dottedBanner { background:url(../images/dottedBg.png) no-repeat; width: 370px; height: 300px; position: absolute; top: 12px; left: 12px;z-index: 2 }
+	.bannerHolder img { position: absolute; left: 12px; top: 12px }
+	.bannerBottom { height: 80px; width: 930px; position: absolute; bottom: 11px; left: 12px; padding-left: 25px; z-index: 5}
+		.bannerQoute { color: #ffffff; font-size: 15px; width: 645px; line-height: 1.2em; margin-top: 10px}
+ 			.bannerQoute h2 { font-family:'Open Sans',sans-serif; font-size: 19px; margin: 10px 0}
+			.bannerQoute p { font-size: 15px; font-family:'Open Sans',sans-serif;  }
+		.bannerButtons { position: absolute; bottom: 15px; right: 25px; }
+			.bannerButtons a { background:url(../images/bannerButtons.png) no-repeat; display: block; width: 18px; height: 17px; float: left; margin: 0 2px; background-position: -25px 0}
+			.bannerButtons a.active { background-position: 0 0;  }
+			.bannerButtons a:hover { background-position: 0 0;}
+			
+	.blackBottom { height: 80px; background: #000; opacity:0.7; filter:alpha(opacity=70); width: 955px; position: absolute; bottom: 11px; left: 12px; }		
+/* end of banner part */		
+
+/* mainbody part */
+.mainBody { position: relative; left: -6px; margin: 25px 0 75px 0; }
+	.mainBody .mainTop { background:url(../images/topBg.png) no-repeat; width: 968px; height: 21px;  }
+	
+	/* code for the center body */
+	.mainBody .mainMiddle { background:url(../images/midBg.png) repeat-y; width: 968px; position: relative; /*overflow: hidden;*/ min-height: 500px }
+		
+		/* menu */
+        #nav { position: absolute; right: 20px }
+		#menu { float: right; margin-right: 30px; width: 570px; margin-right: 30px; border-bottom: 1px solid #094a81; }
+			#menu ul { margin-left: 5px }
+			#menu ul li { float: left; overflow: hidden}
+                #nav ul li { background: #0c5c9d }
+                    #nav ul li ul { top: 0; overflow: hidden}
+                    
+               
+                    .lastMenu ul li {  float: left !important; }
+
+				#nav ul li a { text-decoration: none; color: #ffffff; background:url(../images/menuBg2.png) no-repeat !important; display: block; height: 25px; width: 138px; background-position: -139px 0 !important; padding: 12px 0 10px; text-align: center; margin-right: 1px; font-family:'Open Sans',sans-serif; font-size: 11px; line-height: 1.3em; position: relative}
+				#nav ul li a.active { background-position: 0 0 !important;  }
+				#nav ul li a:hover { background-position: 0 0 !important; }
+
+		
+		.menuText { font-family:'Open Sans',sans-serif; font-size: 15px; color: #000000; margin: 35px 30px 0 0; float: right }
+		
+		.contentHolder { width: 903px; margin: 0px auto 0 }
+			.contentHolder h1 { color: #0a4d84; font-family:'Open Sans',sans-serif; font-size: 22px }
+			.dottedLine { border-bottom: 2px dotted #9D9D9D; display: block; margin: 18px 0 35px 0; }
+			.labelHolder { float: left; margin-right: 20px; min-width: 210px }
+				.contentHolder label { float: left; font-family:'Open Sans',sans-serif; font-size: 15px; color: #000; margin-right: 10px; padding-top: 5px }
+				.contentHolder p { font-family:Myriad Pro Light; color: #000000; padding-top: 5px; }
+                 .unfloated { float: none !important; }
+                 .margined { margin-bottom: 10px}
+				.contentHolder input { float: left; margin: 2px 5px 0 0; }
+               
+			    .contentHolder img { margin-top: 4px }
+				.contentHolder button { background:url(../images/blueButton.png) no-repeat; border: none; color: #ffffff; width: 98px; height: 27px; cursor: pointer; font-family:'Open Sans',sans-serif; text-transform: uppercase; padding-bottom: 5px}
+					.contentHolder button:hover { background-position: 0 -27px }
+
+                .blue_button { background:url(../images/blueButton.png) no-repeat; border: none; color: #ffffff; width: 98px; height: 27px; cursor: pointer; font-family:'Open Sans',sans-serif; text-transform: uppercase; padding-bottom: 5px}
+					.blue_button:hover { background-position: 0 -27px }
+
+                .inputBtn { background: #008bff !important; border: none; color: #ffffff;  height: 27px; cursor: pointer; font-family:'Open Sans',sans-serif; text-transform: uppercase; padding-bottom: 5px}
+					.inputBtn:hover { background: #045da8 !important}
+
+                .buttonBlue { background: #008bff !important; width: 120px !important; }
+                    .buttonBlue:hover { background: #045da8 !important}
+				.longInput { background:url(../images/nameInput.png) no-repeat !important; width: 286px !important;}
+				
+				.comboHolder { overflow: hidden; margin-bottom: 15px; width: 360px; float: left; }
+				.floated { float: left; width: 543px; }
+					.comboBox { background:url(../images/comboBox.png) no-repeat; width: 236px; height: 24px; float: left; overflow: hidden; border: none }
+					.comboBox select { -webkit-appearance: none; background: transparent; width: 270px; border: none; padding: 3px; color: #787676}
+					.comboHolder button {background:url(../images/blueButton.png) no-repeat; border: none; color: #ffffff; width: 98px; height: 27px; cursor: pointer; font-family:'Open Sans',sans-serif; text-transform: uppercase; padding-bottom: 5px; margin-left: 10px}
+					
+				.spanHolder { width: 280px; }
+					.spanHolder label { width: 95px;} 
+					.shortCombo { background:url(../images/shortCombo.png) no-repeat; width: 133px; height: 24px; float: left; overflow: hidden; border: none; margin-right: 30px; margin-left:1px;}
+						.shortCombo select { /*-webkit-appearance: none;*/ background: transparent; width: 155px; border: none; padding: 3px 1px; color: #787676; height:22px;}
+					
+		.tableHolder { margin: 25px 0 70px 0}		
+		 .dataTables_wrapper{ /*padding:0 0 40px 0;*/ }
+        /*tables*/
+        #listtable table{border-collapse:separate; clear:both;}
+            tr{}
+                #listtable th{background:#727272 !important; border:1px solid #d6d6d6 !important; color:#ffffff !important; padding:12px 8px !important; font-size:15px; width: 200px; font-family:'Open Sans',sans-serif;}
+                #listtable td{background:#ececec !important; border:1px solid #d6d6d6 !important; color:#606060; padding:12px 8px !important; font-size:15px; height: 10px}
+                    #listtable td a {color:#042340;}
+            #listtable tr.even td{background:#dfdfdf;}
+            /*.sorting {background: url('DataTables-1.9.1/media/images/sort_both.png') no-repeat scroll right center transparent #013567; cursor:pointer;}
+            .sorting_asc { background: url('DataTables-1.9.1/media/images/sort_asc.png') no-repeat center right #62788c; cursor:pointer; }
+            .sorting_desc { background: url('DataTables-1.9.1/media/images/sort_desc.png') no-repeat center right #042340; cursor:pointer;}		
+	        */
+
+
+/* code for the register page */
+.columnBox { float: left; width: 300px; }
+    .columnBox div { margin: 10px 0; height: 40px; position: relative;}
+        .columnBox div label { width: 115px; font-size: 13px; font-weight: 300 }
+        .columnBox div input { background:url(../images/inputBg.png) no-repeat; width: 125px; height: 25px; padding: 0 5px; border: none; font-size: 12px;}
+
+.columnBox2 { float: left; width: 300px; }
+    .columnBox2 div { height: 40px; position: relative;}
+        .columnBox2 div label { width: 115px; font-size: 13px; font-weight: 300 }
+        .columnBox2 div input { background:url(../images/inputBg.png) no-repeat; width: 125px; height: 25px; padding: 0 5px; border: none; font-size: 12px;}
+
+.columnBox3 { width: 400px }
+    .columnBox3 label { } 
+
+.colorButton { background: #008bff; border: none; color: #ffffff; padding: 5px; border-radius: 2px; cursor: pointer;  }
+    .colorButton:hover{ background: #016eca }
+
+.field-validation-error span{ color: red; font-size: 12px; position: absolute; left: 83px; width: 400px; top: 30px;}
+/* end of the register page */
+
+
+  /* end of the center body */
+.tableFixer li { overflow: hidden; margin: 10px 0;}
+    .tableFixer li label { width: 90px }
+    table.dataTable td {  font-size: 12px; text-align: center}
+   
+	
+	
+	.mainBody .mainBottom { background: url(../images/bottomBg.png) no-repeat; width: 968px; position: relative; height: 23px; }
+	
+	
+	/* code for the login */
+	.loginLogo { margin: 85px 0 70px 0 }
+		.loginLogo a { width: 477px; height:115px; display: block; margin: 0 auto } 
+            .loginLogo a:hover { border: none!important }
+            .loginLogo a img:hover { border: none!important }
+	.loginText { font-family:'Open Sans',sans-serif; font-size: 23px; color: #000000; width: 400px; margin: 0 auto; text-align: center }
+	.loginBody { background:url(../images/loginbglong.png) no-repeat; width: 584px; min-height: 416px; margin: 30px auto 0 }
+	.loginInner {   margin: 0 auto; padding-top: 35px; width: 400px; }
+		.loginInner h2 { font-family:'Open Sans',sans-serif; font-size: 23px; color: #272727; }
+		.loginLine { background:url(../images/loginLine.png) no-repeat; width: 405px; height: 1px; display: block; margin: 20px 0}
+		
+		.loginInner .loginInput	{ overflow: hidden; height: 50px; position: relative;}
+			.loginInner .loginInput label { width: 104px; display: inline-block; font-family:'Open Sans',sans-serif; font-size: 18px; color: #040404 }
+			.loginInner .loginInput input { background:url(../images/loginInput.png) no-repeat; width: 233px; height: 32px; border: none; padding: 0 10px }
+		.loginInner .lockHolder { overflow: hidden; margin-bottom: 30px; }
+			.loginInner .lockHolder span{ background:url(../images/lockBg.png) no-repeat; width: 10px; height: 13px; display: block; float: left; margin-top: 2px; }
+			.loginInner .lockHolder p { font-family:'Open Sans',sans-serif; font-size: 14px; color: #040404; float: left; margin-left: 10px;  }
+		.loginInner button { background:url(../images/loginBlue.png) no-repeat; width: 142px; height: 41px; border: none; margin-right: 15px; color: #ffffff; float: right; cursor: pointer }	 
+			.loginInner button:hover { background-position: 0 -41px}
+
+
+  /* code for the eapr page */
+  .eaprFloterHolder { }
+     .eaprFloater { float: left; width: 50%; overflow: hidden }
+ 
+     .eaprFloater_inner { overflow: hidden; height: 60px; }
+      .eaprFloater_inner label, .eaprFloterHolder label { font-family: 'Open Sans',sans-serif; font-size: 15px; vertical-align: middle; font-weight: 100; margin-bottom: 10px; display: block; }
+        .controlNum { background: url(../images/controlBg.png) no-repeat; height: 24px; width: 276px; border: none; padding: 0 5px}
+        #dtExpense { background: url(../images/eapr_dateBg.png) no-repeat; width: 228px; height: 24px; border: none; padding: 0 5px}
+        #txtExpenseAmount, #amountWord, .payeeInput, .originatingDept, .amountInput { background: url(../images/eapr_expenseAmountBg.png) no-repeat; width: 416px; height: 24px; border: none; padding: 0 5px; margin: 0 !important}
+        .tinpayeeInput, .deptCode_input { background: url(../images/tinpayeeBg.png) no-repeat; width: 288px; height: 24px; border: none; padding: 0 5px; float: none !important; display: block; }
+        .eaprFloterHolder #term { width: 875px; height: 214px; border: 1px solid #C4D0D5; padding: 10px 15px }
+        .comboEapr { background: url(../images/comboEapr.png) no-repeat; width: 426px; height: 24px; border: none; overflow: hidden }
+            .comboEapr select { border: none; background: transparent; width: 110%; -webkit-appearance: none; padding: 0 10px; margin-top: 3px;}
+
+        .checkButton_holder { height: 35px; padding-top: 15px;}
+                .eaprCheckBox { float: left; width: 200px; }
+             .eaprCheckBox input { margin-top: 1px !important; float: left; }
+        
+        .requestInput { background: url(../images/requestByBg.png) no-repeat; width: 343px; height: 24px; border: none; padding: 0 5px }
+        .plusBg { background: url(../images/plusBg2.png) no-repeat !important ; width: 17px !important; height: 16px !important; border: none; font-size: 0; position: relative; top: -24px; right: -435px; }
+        .tblNote { float: left; margin: 10px 20px 0 0 }
+        .closeBtn { background: url(../images/x-button.png) no-repeat !important; float: left; width: 17px; height: 16px; margin-top: 5px;}
+        #ShowChart { position: relative; top: -5px; }
+
+    /*code for the view edit delete buttons */
+    .view_button { background: url(../images/view_icon.png) no-repeat; width: 19px; height: 19px; font-size: 0; display: inline-block; position: relative; top: -5px; margin-right: 3px }
+    .edit_button { background: url(../images/editIcon.png) no-repeat; width: 19px; height: 19px; font-size: 0; display: inline-block; position: relative; top: -5px; margin-right: 3px}
+    .delete_button { background: url(../images/deleteIcon.png) no-repeat; width: 19px; height: 19px; font-size: 0; display: inline-block; position: relative; top: -5px; margin-right: 3px}
+
+    #demo .ui-state-default { width: 115px; }
+    .ui-button { width: auto !important }
+    .ui-dialog-titlebar-close { background: url(../images/deleteIcon.png) no-repeat; width: 19px; height: 19px; border: none; cursor: pointer }
+ /* end of the eapr page */
+
+
+/* update 10/10/13 */
+.contentHolder .dataTables_filter input, #appStatuslisttableDetail_length select { margin: -2px 10px !important; float: none !important }
+#appStatuslisttableDetail_length { margin-left: 10px }
+.dataTables_filter { width: 390px}
+.contentHolder .dataTables_filter label { width: 100% }
+#eaprdialog-form { max-height: 400px !important; padding-top: 30px }
+.table_holder { overflow-x: auto; overflow-y: hidden}
+.validationMessage { color: red }
+/* end of mainbody part */
+
+
+/* footer part */
+.footer { background:url(../images/foooterBg.jpg) repeat-x; height: 95px; }
+ .innerFooter { width: 955px; margin: 0 auto; }
+ .innerFooter p { font-family:'Open Sans',sans-serif; font-size: 16px; color: #b4b4b4; margin-top: 35px; float: right }
+
+ /* center td for admins*/
+ .tdCenter { text-align:center; vertical-align: middle; }	
+ .tdCenter div { margin-left:30px; }
+	
+ /* grid totals*/   
+ .lblTotals { font-weight: bolder }
