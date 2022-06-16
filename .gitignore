@@ -11,7 +11,6 @@
 /CRS.Web/Web3.config
 /CRS.Web/Web.Release.config
 /CRS.Web/Web.Debug.config
-/CRS.Web/packages.config
 /CRS.Web/CRS.Web.csproj.user
 /CRS.Web/.docstates.suo
 /CRS.UnitTest/CRS.UnitTest/bin/Debug
