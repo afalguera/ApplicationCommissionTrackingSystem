@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ACTS_UATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardBrand">
+          <Key>
+            <PropertyRef Name="CardBrandId" />
+          </Key>
+          <Property Name="CardBrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardBrandCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardBrandName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar(max)" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CardType">
+          <Key>
+            <PropertyRef Name="CardTypeId" />
+          </Key>
+          <Property Name="CardTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CardBrandCode" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="100" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="CardSubTypeCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChannelCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChannelName" Type="varchar(max)" Nullable="false" />
+          <Property Name="PayeeName" Type="varchar(max)" />
+          <Property Name="PayeeTin" Type="varchar" MaxLength="50" />
+          <Property Name="AccountName" Type="varchar(max)" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="BankBranch" Type="varchar(max)" />
+          <Property Name="ChannelRequestorId" Type="int" />
+          <Property Name="ChannelCheckerId" Type="int" />
+          <Property Name="ChannelNoterId" Type="int" />
+          <Property Name="SalesManagerId" Type="int" />
+          <Property Name="CreatedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar(max)" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="IsYGC" Type="bit" />
+          <Property Name="IsBranchName" Type="bit" />
+          <Property Name="IsGross" Type="bit" />
+          <Property Name="IsVatable" Type="bit" />
+          <Property Name="IsEAPR" Type="bit" />
+          <Property Name="IsRCBC" Type="bit" />
+          <Property Name="IsMyOrange" Type="bit" />
+          <Property Name="EAPRDescription" Type="varchar(max)" />
+          <Property Name="IsDistrict" Type="bit" />
+        </EntityType>
+        <EntityType Name="ChannelCommissionRate">
+          <Key>
+            <PropertyRef Name="CommissionRateId" />
+          </Key>
+          <Property Name="CommissionRateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceCodePrefix" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SourceCodeSuffix" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SourceCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgencyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Program" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalesManager" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalesManagerEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgencyEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="PayeeAccountNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PayeeAccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tin" Type="nvarchar" MaxLength="50" />
+          <Property Name="Classic" Type="int" />
+          <Property Name="Gold" Type="int" />
+          <Property Name="Platinum" Type="int" />
+          <Property Name="Infinite" Type="int" />
+          <Property Name="World" Type="int" />
+          <Property Name="Diamond" Type="int" />
+          <Property Name="CreditLimit" Type="int" />
+          <Property Name="CoBrandBelowCreditLimit" Type="int" />
+          <Property Name="CoBrandAboveCreditLimit" Type="int" />
+          <Property Name="MasterCardAdditionalIncentives" Type="int" />
+          <Property Name="Approvals" Type="int" />
+          <Property Name="VisaClassic" Type="int" />
+          <Property Name="VisaGold" Type="int" />
+          <Property Name="VisaPlatinum" Type="int" />
+          <Property Name="VisaInfinite" Type="int" />
+          <Property Name="JCBClassic" Type="int" />
+          <Property Name="JCBGold" Type="int" />
+          <Property Name="JCBPlatinum" Type="int" />
+          <Property Name="Zalora" Type="int" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyDate" Type="date" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="DeletedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChannelDetails">
+          <Key>
+            <PropertyRef Name="ChannelDetailsId" />
+          </Key>
+          <Property Name="ChannelDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChannelId" Type="int" Nullable="false" />
+          <Property Name="IsTiering" Type="bit" />
+          <Property Name="IsUsage" Type="bit" />
+          <Property Name="IsInflows" Type="bit" />
+          <Property Name="UsageRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UsagePoints" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CommRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CommPoints" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TieringRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TieringPoints" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TieringCount" Type="int" />
+          <Property Name="InflowsRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InflowsPoints" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InflowsCount" Type="int" />
+          <Property Name="TaxRate" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="CreatedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar(max)" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="IsCreditToBranch" Type="bit" />
+          <Property Name="IsCarDealer" Type="bit" />
+          <Property Name="SERate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NonSERate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsInflowIncentive" Type="bit" />
+          <Property Name="InflowIncentiveCount" Type="int" />
+          <Property Name="InflowIncentiveRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsForEveryCountIncentive" Type="bit" />
+          <Property Name="ForEveryCountIncentiveCount" Type="int" />
+          <Property Name="ForEveryCountIncentiveRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsBranchIncentive" Type="bit" />
+          <Property Name="BranchIncentiveRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BranchIncentiveCount" Type="int" />
+          <Property Name="MainBranchName" Type="varchar(max)" />
+          <Property Name="SecondaryBranchName" Type="varchar(max)" />
+          <Property Name="EffectiveStartDate" Type="datetime" />
+          <Property Name="EffectiveEndDate" Type="datetime" />
+          <Property Name="IsCardBrand" Type="bit" />
+          <Property Name="IsCardType" Type="bit" />
+          <Property Name="CardBrandId" Type="int" />
+          <Property Name="CardTypeId" Type="int" />
+        </EntityType>
+        <Association Name="FK__ChannelDe__CardB__7FD5EEA5">
+          <End Role="CardBrand" Type="Self.CardBrand" Multiplicity="0..1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardBrand">
+              <PropertyRef Name="CardBrandId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="CardBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChannelDe__CardT__00CA12DE">
+          <End Role="CardType" Type="Self.CardType" Multiplicity="0..1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="CardTypeId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="CardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChannelDetails_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="ChannelId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ACTS_UATModelStoreContainer">
+          <EntitySet Name="CardBrand" EntityType="Self.CardBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardType" EntityType="Self.CardType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChannelCommissionRate" EntityType="Self.ChannelCommissionRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChannelDetails" EntityType="Self.ChannelDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChannelDe__CardB__7FD5EEA5" Association="Self.FK__ChannelDe__CardB__7FD5EEA5">
+            <End Role="CardBrand" EntitySet="CardBrand" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChannelDe__CardT__00CA12DE" Association="Self.FK__ChannelDe__CardT__00CA12DE">
+            <End Role="CardType" EntitySet="CardType" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChannelDetails_Channel" Association="Self.FK_ChannelDetails_Channel">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ACTS_UATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardBrand">
+          <Key>
+            <PropertyRef Name="CardBrandId" />
+          </Key>
+          <Property Name="CardBrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardBrandCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardBrandName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ChannelDetails" Relationship="Self.FK__ChannelDe__CardB__7FD5EEA5" FromRole="CardBrand" ToRole="ChannelDetails" />
+        </EntityType>
+        <EntityType Name="CardType">
+          <Key>
+            <PropertyRef Name="CardTypeId" />
+          </Key>
+          <Property Name="CardTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardBrandCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="CardSubTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChannelDetails" Relationship="Self.FK__ChannelDe__CardT__00CA12DE" FromRole="CardType" ToRole="ChannelDetails" />
+        </EntityType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="ChannelId" />
+          </Key>
+          <Property Name="ChannelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChannelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChannelName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PayeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PayeeTin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankBranch" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChannelRequestorId" Type="Int32" />
+          <Property Name="ChannelCheckerId" Type="Int32" />
+          <Property Name="ChannelNoterId" Type="Int32" />
+          <Property Name="SalesManagerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsYGC" Type="Boolean" />
+          <Property Name="IsBranchName" Type="Boolean" />
+          <Property Name="IsGross" Type="Boolean" />
+          <Property Name="IsVatable" Type="Boolean" />
+          <Property Name="IsEAPR" Type="Boolean" />
+          <Property Name="IsRCBC" Type="Boolean" />
+          <Property Name="IsMyOrange" Type="Boolean" />
+          <Property Name="EAPRDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDistrict" Type="Boolean" />
+          <NavigationProperty Name="ChannelDetails" Relationship="Self.FK_ChannelDetails_Channel" FromRole="Channel" ToRole="ChannelDetails" />
+        </EntityType>
+        <EntityType Name="ChannelDetail">
+          <Key>
+            <PropertyRef Name="ChannelDetailsId" />
+          </Key>
+          <Property Name="ChannelDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChannelId" Type="Int32" Nullable="false" />
+          <Property Name="IsTiering" Type="Boolean" />
+          <Property Name="IsUsage" Type="Boolean" />
+          <Property Name="IsInflows" Type="Boolean" />
+          <Property Name="UsageRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UsagePoints" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CommRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CommPoints" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TieringRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TieringPoints" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TieringCount" Type="Int32" />
+          <Property Name="InflowsRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InflowsPoints" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InflowsCount" Type="Int32" />
+          <Property Name="TaxRate" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCreditToBranch" Type="Boolean" />
+          <Property Name="IsCarDealer" Type="Boolean" />
+          <Property Name="SERate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NonSERate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsInflowIncentive" Type="Boolean" />
+          <Property Name="InflowIncentiveCount" Type="Int32" />
+          <Property Name="InflowIncentiveRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsForEveryCountIncentive" Type="Boolean" />
+          <Property Name="ForEveryCountIncentiveCount" Type="Int32" />
+          <Property Name="ForEveryCountIncentiveRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsBranchIncentive" Type="Boolean" />
+          <Property Name="BranchIncentiveRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BranchIncentiveCount" Type="Int32" />
+          <Property Name="MainBranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecondaryBranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EffectiveStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EffectiveEndDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCardBrand" Type="Boolean" />
+          <Property Name="IsCardType" Type="Boolean" />
+          <Property Name="CardBrandId" Type="Int32" />
+          <Property Name="CardTypeId" Type="Int32" />
+          <NavigationProperty Name="CardBrand" Relationship="Self.FK__ChannelDe__CardB__7FD5EEA5" FromRole="ChannelDetails" ToRole="CardBrand" />
+          <NavigationProperty Name="CardType" Relationship="Self.FK__ChannelDe__CardT__00CA12DE" FromRole="ChannelDetails" ToRole="CardType" />
+          <NavigationProperty Name="Channel" Relationship="Self.FK_ChannelDetails_Channel" FromRole="ChannelDetails" ToRole="Channel" />
+        </EntityType>
+        <Association Name="FK__ChannelDe__CardB__7FD5EEA5">
+          <End Role="CardBrand" Type="Self.CardBrand" Multiplicity="0..1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardBrand">
+              <PropertyRef Name="CardBrandId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="CardBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChannelDe__CardT__00CA12DE">
+          <End Role="CardType" Type="Self.CardType" Multiplicity="0..1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="CardTypeId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="CardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChannelDetails_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="ChannelDetails" Type="Self.ChannelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="ChannelId" />
+            </Principal>
+            <Dependent Role="ChannelDetails">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ACTSdbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardBrands" EntityType="Self.CardBrand" />
+          <EntitySet Name="CardTypes" EntityType="Self.CardType" />
+          <EntitySet Name="Channels" EntityType="Self.Channel" />
+          <EntitySet Name="ChannelDetails" EntityType="Self.ChannelDetail" />
+          <AssociationSet Name="FK__ChannelDe__CardB__7FD5EEA5" Association="Self.FK__ChannelDe__CardB__7FD5EEA5">
+            <End Role="CardBrand" EntitySet="CardBrands" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChannelDe__CardT__00CA12DE" Association="Self.FK__ChannelDe__CardT__00CA12DE">
+            <End Role="CardType" EntitySet="CardTypes" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChannelDetails_Channel" Association="Self.FK_ChannelDetails_Channel">
+            <End Role="Channel" EntitySet="Channels" />
+            <End Role="ChannelDetails" EntitySet="ChannelDetails" />
+          </AssociationSet>
+          <EntitySet Name="ChannelCommissionRates" EntityType="ACTS_UATModel.ChannelCommissionRate" />
+        </EntityContainer>
+        <EntityType Name="ChannelCommissionRate">
+          <Key>
+            <PropertyRef Name="CommissionRateId" />
+          </Key>
+          <Property Name="CommissionRateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceCodePrefix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCodeSuffix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AgencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Program" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesManagerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AgencyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayeeAccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayeeAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Classic" Type="Int32" />
+          <Property Name="Gold" Type="Int32" />
+          <Property Name="Platinum" Type="Int32" />
+          <Property Name="Infinite" Type="Int32" />
+          <Property Name="World" Type="Int32" />
+          <Property Name="Diamond" Type="Int32" />
+          <Property Name="CreditLimit" Type="Int32" />
+          <Property Name="CoBrandBelowCreditLimit" Type="Int32" />
+          <Property Name="CoBrandAboveCreditLimit" Type="Int32" />
+          <Property Name="MasterCardAdditionalIncentives" Type="Int32" />
+          <Property Name="Approvals" Type="Int32" />
+          <Property Name="VisaClassic" Type="Int32" />
+          <Property Name="VisaGold" Type="Int32" />
+          <Property Name="VisaPlatinum" Type="Int32" />
+          <Property Name="VisaInfinite" Type="Int32" />
+          <Property Name="JCBClassic" Type="Int32" />
+          <Property Name="JCBGold" Type="Int32" />
+          <Property Name="JCBPlatinum" Type="Int32" />
+          <Property Name="Zalora" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifyDate" Type="DateTime" Precision="0" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ACTS_UATModelStoreContainer" CdmEntityContainer="ACTSdbContext">
+          <EntitySetMapping Name="CardBrands">
+            <EntityTypeMapping TypeName="ACTS_UATModel.CardBrand">
+              <MappingFragment StoreEntitySet="CardBrand">
+                <ScalarProperty Name="CardBrandId" ColumnName="CardBrandId" />
+                <ScalarProperty Name="CardBrandCode" ColumnName="CardBrandCode" />
+                <ScalarProperty Name="CardBrandName" ColumnName="CardBrandName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTypes">
+            <EntityTypeMapping TypeName="ACTS_UATModel.CardType">
+              <MappingFragment StoreEntitySet="CardType">
+                <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+                <ScalarProperty Name="CardTypeCode" ColumnName="CardTypeCode" />
+                <ScalarProperty Name="CardTypeName" ColumnName="CardTypeName" />
+                <ScalarProperty Name="CardBrandCode" ColumnName="CardBrandCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CardSubTypeCode" ColumnName="CardSubTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Channels">
+            <EntityTypeMapping TypeName="ACTS_UATModel.Channel">
+              <MappingFragment StoreEntitySet="Channel">
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="ChannelCode" ColumnName="ChannelCode" />
+                <ScalarProperty Name="ChannelName" ColumnName="ChannelName" />
+                <ScalarProperty Name="PayeeName" ColumnName="PayeeName" />
+                <ScalarProperty Name="PayeeTin" ColumnName="PayeeTin" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+                <ScalarProperty Name="ChannelRequestorId" ColumnName="ChannelRequestorId" />
+                <ScalarProperty Name="ChannelCheckerId" ColumnName="ChannelCheckerId" />
+                <ScalarProperty Name="ChannelNoterId" ColumnName="ChannelNoterId" />
+                <ScalarProperty Name="SalesManagerId" ColumnName="SalesManagerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsYGC" ColumnName="IsYGC" />
+                <ScalarProperty Name="IsBranchName" ColumnName="IsBranchName" />
+                <ScalarProperty Name="IsGross" ColumnName="IsGross" />
+                <ScalarProperty Name="IsVatable" ColumnName="IsVatable" />
+                <ScalarProperty Name="IsEAPR" ColumnName="IsEAPR" />
+                <ScalarProperty Name="IsRCBC" ColumnName="IsRCBC" />
+                <ScalarProperty Name="IsMyOrange" ColumnName="IsMyOrange" />
+                <ScalarProperty Name="EAPRDescription" ColumnName="EAPRDescription" />
+                <ScalarProperty Name="IsDistrict" ColumnName="IsDistrict" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChannelDetails">
+            <EntityTypeMapping TypeName="ACTS_UATModel.ChannelDetail">
+              <MappingFragment StoreEntitySet="ChannelDetails">
+                <ScalarProperty Name="ChannelDetailsId" ColumnName="ChannelDetailsId" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="IsTiering" ColumnName="IsTiering" />
+                <ScalarProperty Name="IsUsage" ColumnName="IsUsage" />
+                <ScalarProperty Name="IsInflows" ColumnName="IsInflows" />
+                <ScalarProperty Name="UsageRate" ColumnName="UsageRate" />
+                <ScalarProperty Name="UsagePoints" ColumnName="UsagePoints" />
+                <ScalarProperty Name="CommRate" ColumnName="CommRate" />
+                <ScalarProperty Name="CommPoints" ColumnName="CommPoints" />
+                <ScalarProperty Name="TieringRate" ColumnName="TieringRate" />
+                <ScalarProperty Name="TieringPoints" ColumnName="TieringPoints" />
+                <ScalarProperty Name="TieringCount" ColumnName="TieringCount" />
+                <ScalarProperty Name="InflowsRate" ColumnName="InflowsRate" />
+                <ScalarProperty Name="InflowsPoints" ColumnName="InflowsPoints" />
+                <ScalarProperty Name="InflowsCount" ColumnName="InflowsCount" />
+                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsCreditToBranch" ColumnName="IsCreditToBranch" />
+                <ScalarProperty Name="IsCarDealer" ColumnName="IsCarDealer" />
+                <ScalarProperty Name="SERate" ColumnName="SERate" />
+                <ScalarProperty Name="NonSERate" ColumnName="NonSERate" />
+                <ScalarProperty Name="IsInflowIncentive" ColumnName="IsInflowIncentive" />
+                <ScalarProperty Name="InflowIncentiveCount" ColumnName="InflowIncentiveCount" />
+                <ScalarProperty Name="InflowIncentiveRate" ColumnName="InflowIncentiveRate" />
+                <ScalarProperty Name="IsForEveryCountIncentive" ColumnName="IsForEveryCountIncentive" />
+                <ScalarProperty Name="ForEveryCountIncentiveCount" ColumnName="ForEveryCountIncentiveCount" />
+                <ScalarProperty Name="ForEveryCountIncentiveRate" ColumnName="ForEveryCountIncentiveRate" />
+                <ScalarProperty Name="IsBranchIncentive" ColumnName="IsBranchIncentive" />
+                <ScalarProperty Name="BranchIncentiveRate" ColumnName="BranchIncentiveRate" />
+                <ScalarProperty Name="BranchIncentiveCount" ColumnName="BranchIncentiveCount" />
+                <ScalarProperty Name="MainBranchName" ColumnName="MainBranchName" />
+                <ScalarProperty Name="SecondaryBranchName" ColumnName="SecondaryBranchName" />
+                <ScalarProperty Name="EffectiveStartDate" ColumnName="EffectiveStartDate" />
+                <ScalarProperty Name="EffectiveEndDate" ColumnName="EffectiveEndDate" />
+                <ScalarProperty Name="IsCardBrand" ColumnName="IsCardBrand" />
+                <ScalarProperty Name="IsCardType" ColumnName="IsCardType" />
+                <ScalarProperty Name="CardBrandId" ColumnName="CardBrandId" />
+                <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChannelCommissionRates">
+            <EntityTypeMapping TypeName="ACTS_UATModel.ChannelCommissionRate">
+              <MappingFragment StoreEntitySet="ChannelCommissionRate">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyDate" ColumnName="LastModifyDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Zalora" ColumnName="Zalora" />
+                <ScalarProperty Name="JCBPlatinum" ColumnName="JCBPlatinum" />
+                <ScalarProperty Name="JCBGold" ColumnName="JCBGold" />
+                <ScalarProperty Name="JCBClassic" ColumnName="JCBClassic" />
+                <ScalarProperty Name="VisaInfinite" ColumnName="VisaInfinite" />
+                <ScalarProperty Name="VisaPlatinum" ColumnName="VisaPlatinum" />
+                <ScalarProperty Name="VisaGold" ColumnName="VisaGold" />
+                <ScalarProperty Name="VisaClassic" ColumnName="VisaClassic" />
+                <ScalarProperty Name="Approvals" ColumnName="Approvals" />
+                <ScalarProperty Name="MasterCardAdditionalIncentives" ColumnName="MasterCardAdditionalIncentives" />
+                <ScalarProperty Name="CoBrandAboveCreditLimit" ColumnName="CoBrandAboveCreditLimit" />
+                <ScalarProperty Name="CoBrandBelowCreditLimit" ColumnName="CoBrandBelowCreditLimit" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="World" ColumnName="World" />
+                <ScalarProperty Name="Infinite" ColumnName="Infinite" />
+                <ScalarProperty Name="Platinum" ColumnName="Platinum" />
+                <ScalarProperty Name="Gold" ColumnName="Gold" />
+                <ScalarProperty Name="Classic" ColumnName="Classic" />
+                <ScalarProperty Name="Tin" ColumnName="Tin" />
+                <ScalarProperty Name="PayeeAccountName" ColumnName="PayeeAccountName" />
+                <ScalarProperty Name="PayeeAccountNumber" ColumnName="PayeeAccountNumber" />
+                <ScalarProperty Name="AgencyEmail" ColumnName="AgencyEmail" />
+                <ScalarProperty Name="SalesManagerEmail" ColumnName="SalesManagerEmail" />
+                <ScalarProperty Name="SalesManager" ColumnName="SalesManager" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+                <ScalarProperty Name="SourceCode" ColumnName="SourceCode" />
+                <ScalarProperty Name="SourceCodeSuffix" ColumnName="SourceCodeSuffix" />
+                <ScalarProperty Name="SourceCodePrefix" ColumnName="SourceCodePrefix" />
+                <ScalarProperty Name="CommissionRateId" ColumnName="CommissionRateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

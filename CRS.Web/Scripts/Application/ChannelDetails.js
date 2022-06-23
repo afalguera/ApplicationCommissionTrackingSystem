@@ -6,27 +6,27 @@
     self.channels = ko.observableArray();
     self.mode = ko.observable(modes.View);
 
-     $('body').on('show', '.modal', function () {
-        $(this).css({ 'width': '750px', 'margin-top': ($(window).height() - $(this).height()) / 2, 'margin-left': -($(this).height() / 2), 'top': '0'});
-     });
+    $('body').on('show', '.modal', function () {
+        $(this).css({ 'width': '750px', 'margin-top': ($(window).height() - $(this).height()) / 2, 'margin-left': -($(this).height() / 2), 'top': '0' });
+    });
 
-     $('body').on('show', '#confirmDeleteModal', function () {
-         $(this).css({ 'width': '350px', 'margin-top': ($(window).height() - $(this).height()) / 2, 'margin-left': -($(this).height() / 2), 'top': '0' });
-     });
+    $('body').on('show', '#confirmDeleteModal', function () {
+        $(this).css({ 'width': '350px', 'margin-top': ($(window).height() - $(this).height()) / 2, 'margin-left': -($(this).height() / 2), 'top': '0' });
+    });
 
-     
+
 
     $(".display").removeAttr('style').css("font-size", "small");
 
     //self.itemColumns = ['ChannelName', 'IsTiering', 'IsUsage', 'IsInflows', 'UsageRate', 'UsagePoints', 'CommRate', 'CommPoints', 'TieringRate',
-	//	'TieringPoints', 'TieringCount', 'InflowsRate', 'InflowsPoints', 'InflowsCount', 'IsCoreBrand', 'CoreBrandRate', 'TaxRate', 'IsCreditToBranch',
-	//	'IsCarDealer', 'SERate', 'NonSERate', 'IsInflowIncentive', 'InflowIncentiveCount', 'InflowIncentiveRate', 'IsForEveryCountIncentive',
-	//	'ForEveryCountIncentiveCount', 'ForEveryCountIncentiveRate', 'IsBranchIncentive', 'BranchIncentiveRate', 'BranchIncentiveCount', 'MainBranchName',
+    //	'TieringPoints', 'TieringCount', 'InflowsRate', 'InflowsPoints', 'InflowsCount', 'IsCoreBrand', 'CoreBrandRate', 'TaxRate', 'IsCreditToBranch',
+    //	'IsCarDealer', 'SERate', 'NonSERate', 'IsInflowIncentive', 'InflowIncentiveCount', 'InflowIncentiveRate', 'IsForEveryCountIncentive',
+    //	'ForEveryCountIncentiveCount', 'ForEveryCountIncentiveRate', 'IsBranchIncentive', 'BranchIncentiveRate', 'BranchIncentiveCount', 'MainBranchName',
     //	'SecondaryBranchName', 'EffectiveStartDate', 'EffectiveEndDate', 'Actions'];
 
     self.itemColumns = ['ChannelName', 'CommRate', 'TieringRate',
-     'TieringCount', 'InflowsRate', 'InflowsCount', 'TaxRate',
-     'SERate', 'NonSERate','EffectiveStartDate', 'EffectiveEndDate', 'Actions'];
+        'TieringCount', 'InflowsRate', 'InflowsCount', 'TaxRate',
+        'SERate', 'NonSERate', 'EffectiveStartDate', 'EffectiveEndDate', 'Actions'];
 
     self.isEditMode = ko.computed(function () {
         return self.mode() == modes.Edit;
@@ -75,16 +75,17 @@
     self.commPoints = ko.observable();
     self.taxRate = ko.observable();
     self.effectiveStartDate = ko.observable().extend({ required: { message: 'Effective Start Date is required.' } });
-    self.effectiveEndDate = ko.observable().extend({ validation: {
-        message: 'Must be greater than Effective Start Date.',
-        validator: function (val) {
-            if (self.effectiveStartDate() == undefined || self.effectiveStartDate() == ''  
-                || val == '' || typeof val == 'undefined') {
-                return true;
+    self.effectiveEndDate = ko.observable().extend({
+        validation: {
+            message: 'Must be greater than Effective Start Date.',
+            validator: function (val) {
+                if (self.effectiveStartDate() == undefined || self.effectiveStartDate() == ''
+                    || val == '' || typeof val == 'undefined') {
+                    return true;
+                }
+                return Date.parse(self.effectiveStartDate()) < Date.parse(val);
             }
-            return Date.parse(self.effectiveStartDate()) < Date.parse(val);
         }
-    }
     });
 
     self.isCreditToBranch = ko.observable();
@@ -427,9 +428,9 @@
             }
 
             if (self.isEditMode()) {
-                    options.url = '/ChannelDetails/EditChannelDetails';
-                    options.type = 'POST';
-                    options.data.Id = self.id();
+                options.url = '/ChannelDetails/EditChannelDetails';
+                options.type = 'POST';
+                options.data.Id = self.id();
             }
 
             $.ajax({

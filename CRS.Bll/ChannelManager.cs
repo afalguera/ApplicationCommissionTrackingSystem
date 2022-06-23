@@ -19,12 +19,12 @@ namespace CRS.Bll
             return ChannelDB.CheckIfExists(channelName, ChannelDB.ChannelFilters.channelName);
         }
 
-        public static Channel GetItem(int channelId)
+        public static BusinessEntities.Channel GetItem(int channelId)
         {
             return ChannelDB.GetItem(channelId);
         }
 
-        public static IEnumerable<Channel> GetList()
+        public static IEnumerable<BusinessEntities.Channel> GetList()
         {
             return ChannelDB.GetList();
         }
@@ -34,12 +34,12 @@ namespace CRS.Bll
             return ChannelDB.GetPositionDetailsList();
         }
 
-        public static bool Save(Channel channel)
+        public static bool Save(BusinessEntities.Channel channel)
         {
             return ChannelDB.Save(channel);
         }
 
-        public static bool Update(Channel channel)
+        public static bool Update(BusinessEntities.Channel channel)
         {
             return ChannelDB.Update(channel);
         }

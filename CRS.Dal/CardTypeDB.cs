@@ -60,12 +60,12 @@ namespace CRS.Dal
         
         }
 
-        public static IEnumerable<CardType> GetList()
+        public static IEnumerable<BusinessEntities.CardType> GetList()
         {
-            return DBSqlHelper.ExecuteGetList<CardType>("spCardTypeGetList", FillDataRecord, null);
+            return DBSqlHelper.ExecuteGetList<BusinessEntities.CardType>("spCardTypeGetList", FillDataRecord, null);
         }
 
-        public static bool Save(CardType cardType)
+        public static bool Save(BusinessEntities.CardType cardType)
         {
             return DBSqlHelper.ExecuteCUD(new[]
             {
@@ -77,7 +77,7 @@ namespace CRS.Dal
             }, "spCardTypeSave");
         }
 
-        public static bool Update(CardType cardType)
+        public static bool Update(BusinessEntities.CardType cardType)
         {
             return DBSqlHelper.ExecuteCUD(new[]
             {
@@ -95,9 +95,9 @@ namespace CRS.Dal
             return DBSqlHelper.ExecuteCUD(new[] { new SqlParameter("@id", cardTypeId), new SqlParameter("@deletedBy", deletedBy) }, "spCardTypeDelete");
         }
 
-        private static CardType FillDataRecord(IDataRecord dataRecord)
+        private static BusinessEntities.CardType FillDataRecord(IDataRecord dataRecord)
         {
-            return new CardType()
+            return new BusinessEntities.CardType()
             {
                 ID = dataRecord.GetInt32(dataRecord.GetOrdinal("CardTypeId")),
                 Code = dataRecord["CardTypeCode"] as string,

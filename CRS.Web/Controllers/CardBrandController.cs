@@ -16,6 +16,7 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
+        #region SPCode
         public JsonResult GetCardBrandList()
         {
             return Json(CardBrandManager.GetList(), JsonRequestBehavior.AllowGet);
@@ -52,5 +53,6 @@ namespace MvcApplication1.Controllers
         {
             return Json(!CardBrandManager.CardBrandNameExists(cardBrandName), JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

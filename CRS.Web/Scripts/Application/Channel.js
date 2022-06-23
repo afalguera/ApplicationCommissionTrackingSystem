@@ -15,9 +15,7 @@
     //   'ChannelRequestor', 'ChannelChecker', 'ChannelNoter', 'SalesManager', 'EAPRDescription', 'IsYGC', 'IsGross', 'IsVatable',
     //   'IsEAPR', 'IsRCBC', 'IsMyOrange', 'Actions'
     //];
-    self.itemColumns = ['ChannelName', 'ChannelCode', 'PayeeName', 'PayeeTin', 'ChannelRequestor',
-                        'ChannelChecker', 'ChannelNoter', 'SalesManager', 'EAPRDescription', 'Actions'
-    ];
+    self.itemColumns = ['ChannelName', 'ChannelCode','ChannelRequestor', 'EAPRDescription', 'Actions'];
 
 
     self.isEditMode = ko.computed(function () {
