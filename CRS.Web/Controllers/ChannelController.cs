@@ -1,5 +1,6 @@
 ﻿using CRS.Bll;
 using CRS.BusinessEntities;
+using CRS.Dal;
 using CRS.Helpers;
 using System.Linq;
 using System.Web.Mvc;
@@ -17,6 +18,31 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
+        #region EF
+        [HttpGet]
+        public JsonResult ViewChannelEF()
+        {
+            using (var context = new ACTSdbContext())
+            {
+                var data = context.Channels.ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetChannelDetailsEF(int id)
+        {
+            using (var context = new ACTSdbContext())
+            {
+                var channelId = context.Channels.Select(m => m.ChannelId);
+                var data = context.ChannelDetails.Where(x => x.ChannelId.Equals(channelId)).ToList();
+                return PartialView("~/Views/ChannelDetails/_GetChannelDetailsFromChannel" , data);
+            };
+        }
+
+        #endregion
+
+        #region SPCode
         public JsonResult GetChannelList()
         {
             return Json(ChannelManager.GetList(), JsonRequestBehavior.AllowGet);
@@ -44,7 +70,7 @@ namespace MvcApplication1.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveChannel(Channel channel)
+        public JsonResult SaveChannel(CRS.BusinessEntities.Channel channel)
         {
             channel.CreatedBy = SessionWrapper.CurrentUser.UserName;
 
@@ -52,11 +78,19 @@ namespace MvcApplication1.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditChannel(Channel channel)
+        public JsonResult EditChannel(CRS.BusinessEntities.Channel channel)
         {
             channel.ModifiedBy = SessionWrapper.CurrentUser.UserName;
 
             return Json(ChannelManager.Update(channel));
         }
+        #endregion
     }
+
+    //public class Test
+    //{
+    //    public int ChannelCode { get; set; }
+    //    public string ChannelName { get; set; }
+    //    public int CommissionRate { get; set; }
+    //}
 }

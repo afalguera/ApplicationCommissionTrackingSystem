@@ -10,7 +10,7 @@ namespace CRS.Bll
 {
     public class CardTypeManager
     {
-        public static IEnumerable<CardType> GetList()
+        public static IEnumerable<BusinessEntities.CardType> GetList()
         {
             return CardTypeDB.GetList();
         }
@@ -25,12 +25,12 @@ namespace CRS.Bll
             return CardTypeDB.CheckIfExists(cardTypeCode, cardTypeName, cardSubTypeCode);
         }
 
-        public static bool Save(CardType cardType)
+        public static bool Save(BusinessEntities.CardType cardType)
         {
             return CardTypeDB.Save(cardType);
         }
 
-        public static bool Update(CardType cardType)
+        public static bool Update(BusinessEntities.CardType cardType)
         {
             return CardTypeDB.Update(cardType);
         }

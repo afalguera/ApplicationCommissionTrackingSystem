@@ -168,19 +168,19 @@ namespace CRS.Dal
         #endregion
 
         #region GetCardBrands
-        public static IEnumerable<CardBrand> GetCardBrands()
+        public static IEnumerable<BusinessEntities.CardBrand> GetCardBrands()
         {
             string spName = "spGetCardBrands";
             DBSqlHelper sqlHelper = new DBSqlHelper();
             SqlDataReader reader;
-            List<CardBrand> list = new List<CardBrand>();
+            List<BusinessEntities.CardBrand> list = new List<BusinessEntities.CardBrand>();
             reader = sqlHelper.ExecuteReaderSPDB(spName, null);
 
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    CardBrand dto = new CardBrand();
+                    BusinessEntities.CardBrand dto = new BusinessEntities.CardBrand();
                     dto.CardBrandCode = reader["CardBrandCode"].ToString();
                     dto.CardBrandName = reader["CardBrandName"].ToString();
 
@@ -195,12 +195,12 @@ namespace CRS.Dal
         #endregion
 
         #region GetCardTypes
-        public static IEnumerable<CardType> GetCardTypes(string cardBrandCode)
+        public static IEnumerable<BusinessEntities.CardType> GetCardTypes(string cardBrandCode)
         {
             string spName = "spGetCardTypes";
             DBSqlHelper sqlHelper = new DBSqlHelper();
             SqlDataReader reader;
-            List<CardType> list = new List<CardType>();
+            List<BusinessEntities.CardType> list = new List<BusinessEntities.CardType>();
             SqlParameter[] sqlParams = new SqlParameter[] {
 							new SqlParameter("@cardBrandCode", cardBrandCode)};
             reader = sqlHelper.ExecuteReaderSPDB(spName, sqlParams);
@@ -209,7 +209,7 @@ namespace CRS.Dal
             {
                 while (reader.Read())
                 {
-                    CardType dto = new CardType();
+                    BusinessEntities.CardType dto = new BusinessEntities.CardType();
                     dto.CardBrandCode = reader["CardBrandCode"].ToString();
                     dto.CardTypeCode = reader["CardTypeCode"].ToString();
                     dto.CardTypeName = reader["CardTypeName"].ToString()

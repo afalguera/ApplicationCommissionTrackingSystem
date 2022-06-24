@@ -29,14 +29,14 @@ namespace CRS.Dal
             return DBSqlHelper.ExecuteCUD(new[] { new SqlParameter("@id", channelId), new SqlParameter("@deletedBy", deletedBy) }, "spChannelDelete");
         }
 
-        public static Channel GetItem(int id)
+        public static BusinessEntities.Channel GetItem(int id)
         {
-            return DBSqlHelper.ExecuteGet<Channel>("spGetChannelByFilter", FillDataRecord, new[] { new SqlParameter("id", id) });
+            return DBSqlHelper.ExecuteGet<BusinessEntities.Channel>("spGetChannelByFilter", FillDataRecord, new[] { new SqlParameter("id", id) });
         }
 
-        public static IEnumerable<Channel> GetList()
+        public static IEnumerable<BusinessEntities.Channel> GetList()
         {
-            return DBSqlHelper.ExecuteGetList<Channel>("spChannelGetList", FillDataRecord, null);
+            return DBSqlHelper.ExecuteGetList<BusinessEntities.Channel>("spChannelGetList", FillDataRecord, null);
         }
 
         public static IEnumerable<PositionDetails> GetPositionDetailsList()
@@ -54,7 +54,7 @@ namespace CRS.Dal
                 }, null);
         }
 
-        public static bool Save(Channel channel)
+        public static bool Save(BusinessEntities.Channel channel)
         {
             return DBSqlHelper.ExecuteCUD(new[]
             {
@@ -80,7 +80,7 @@ namespace CRS.Dal
             }, "spChannelSave");           
         }
 
-        public static bool Update(Channel channel)
+        public static bool Update(BusinessEntities.Channel channel)
         {
             return DBSqlHelper.ExecuteCUD(new[]
             {
@@ -107,12 +107,12 @@ namespace CRS.Dal
             }, "spChannelUpdate");
         }
         
-        private static Channel FillDataRecord(IDataRecord dataRecord)
+        private static BusinessEntities.Channel FillDataRecord(IDataRecord dataRecord)
 		{
             
 
             //return new Channel()
-            var ch = new Channel()
+            var ch = new BusinessEntities.Channel()
             {
                 ID = dataRecord.GetInt32(dataRecord.GetOrdinal("ChannelId")),
                 Code = dataRecord["ChannelCode"] as string,

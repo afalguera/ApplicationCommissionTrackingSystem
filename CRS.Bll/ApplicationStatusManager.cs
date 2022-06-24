@@ -113,14 +113,14 @@ namespace CRS.Bll
         #endregion
 
         #region GetCardBrands
-        public static IEnumerable<CardBrand> GetCardBrands()
+        public static IEnumerable<BusinessEntities.CardBrand> GetCardBrands()
         {
             return ApplicationStatusDB.GetCardBrands();
         } 
         #endregion
 
         #region GetCardTypes
-        public static IEnumerable<CardType> GetCardTypes(string cardBrandCode)
+        public static IEnumerable<BusinessEntities.CardType> GetCardTypes(string cardBrandCode)
         {
             return ApplicationStatusDB.GetCardTypes(cardBrandCode);
         } 
